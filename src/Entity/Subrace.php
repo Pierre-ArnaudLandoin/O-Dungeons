@@ -7,105 +7,76 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=SubraceRepository::class)
- */
+#[ORM\Entity(repositoryClass: SubraceRepository::class)]
 class Subrace
 {
-    /**
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue
-     *
-     * @ORM\Column(type="integer")
-     */
     #[Groups(['read_race', 'browse_subraces', 'read_subraces'])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Groups(['read_race', 'browse_subraces', 'read_subraces'])]
     #[Assert\NotBlank]
     #[Assert\Length(min: 2, max: 255, minMessage: 'Le nom de la sous-race doit contenir au moins {{ limit }} caractères', maxMessage: 'Le nom de la sous-race doit contenir au maximum {{ limit }} caractères')]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $name = null;
 
-    /**
-     * @ORM\Column(type="text")
-     */
     #[Groups(['read_race', 'read_subraces'])]
     #[Assert\NotBlank]
+    #[ORM\Column(type: 'text')]
     private ?string $description = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Groups(['read_race', 'read_subraces'])]
     #[Assert\Url]
     #[Assert\NotBlank]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $imageUrl = null;
 
-    /**
-     * @ORM\Column(type="integer", options={"default": 0})
-     */
     #[Groups(['read_race', 'read_subraces'])]
     #[Assert\NotBlank]
     #[Assert\PositiveOrZero]
+    #[ORM\Column(type: 'integer', options: ['default' => 0])]
     private ?int $strength = null;
 
-    /**
-     * @ORM\Column(type="integer", options={"default": 0})
-     */
     #[Groups(['read_race', 'read_subraces'])]
     #[Assert\NotBlank]
     #[Assert\PositiveOrZero]
+    #[ORM\Column(type: 'integer', options: ['default' => 0])]
     private ?int $dexterity = null;
 
-    /**
-     * @ORM\Column(type="integer", options={"default": 0})
-     */
     #[Groups(['read_race', 'read_subraces'])]
     #[Assert\NotBlank]
     #[Assert\PositiveOrZero]
+    #[ORM\Column(type: 'integer', options: ['default' => 0])]
     private ?int $constitution = null;
 
-    /**
-     * @ORM\Column(type="integer", options={"default": 0})
-     */
     #[Groups(['read_race', 'read_subraces'])]
     #[Assert\NotBlank]
     #[Assert\PositiveOrZero]
+    #[ORM\Column(type: 'integer', options: ['default' => 0])]
     private ?int $wisdom = null;
 
-    /**
-     * @ORM\Column(type="integer", options={"default": 0})
-     */
     #[Groups(['read_race', 'read_subraces'])]
     #[Assert\NotBlank]
     #[Assert\PositiveOrZero]
+    #[ORM\Column(type: 'integer', options: ['default' => 0])]
     private ?int $intelligence = null;
 
-    /**
-     * @ORM\Column(type="integer", options={"default": 0})
-     */
     #[Groups(['read_race', 'read_subraces'])]
     #[Assert\NotBlank]
     #[Assert\PositiveOrZero]
+    #[ORM\Column(type: 'integer', options: ['default' => 0])]
     private ?int $charisma = null;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
     #[Groups(['read_race', 'read_subraces'])]
     #[Assert\NotBlank]
+    #[ORM\Column(type: 'text', nullable: true)]
     private ?string $trait = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Race::class, inversedBy="subraces")
-     *
-     * @ORM\JoinColumn(nullable=false)
-     */
     #[Groups('read_subraces')]
+    #[ORM\ManyToOne(targetEntity: Race::class, inversedBy: 'subraces')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?\App\Entity\Race $race = null;
 
     public function getId(): ?int

@@ -9,39 +9,27 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=AvatarRepository::class)
- */
+#[ORM\Entity(repositoryClass: AvatarRepository::class)]
 class Avatar
 {
-    /**
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue
-     *
-     * @ORM\Column(type="integer")
-     */
     #[Groups(['browse_avatars', 'read_user'])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Groups(['browse_avatars', 'read_user'])]
     #[Assert\NotBlank]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $name = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Groups(['browse_avatars', 'read_user'])]
     #[Assert\Url]
     #[Assert\NotBlank]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $imageUrl = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="avatar")
-     */
+    #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'avatar')]
     private \Doctrine\Common\Collections\ArrayCollection|array $users;
 
     public function __construct()

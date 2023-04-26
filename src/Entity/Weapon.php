@@ -9,67 +9,47 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=WeaponRepository::class)
- */
+#[ORM\Entity(repositoryClass: WeaponRepository::class)]
 class Weapon
 {
-    /**
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue
-     *
-     * @ORM\Column(type="integer")
-     */
     #[Groups('read_class')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Groups('read_class')]
     #[Assert\NotBlank]
     #[Assert\Length(max: 255, maxMessage: 'Nombre de caractères autorisés dépassés ({{ value }}), maximum 255')]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $name = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Groups('read_class')]
     #[Assert\NotBlank]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $type = null;
 
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
     #[Groups('read_class')]
     #[Assert\NotBlank]
+    #[ORM\Column(type: 'string', length: 50)]
     private ?string $damageDice = null;
 
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
     #[Groups('read_class')]
     #[Assert\NotBlank]
+    #[ORM\Column(type: 'string', length: 50)]
     private ?string $damageType = null;
 
-    /**
-     * @ORM\Column(type="float", options={"default": 0})
-     */
     #[Groups('read_class')]
     #[Assert\Type(type: 'float', message: 'La valeur doit être un nombre supérieur ou égal à 0.')]
     #[Assert\PositiveOrZero]
+    #[ORM\Column(type: 'float', options: ['default' => 0])]
     private ?float $weight = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
     #[Groups('read_class')]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $property = null;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=PlayableClass::class, mappedBy="weapons")
-     */
+    #[ORM\ManyToMany(targetEntity: PlayableClass::class, mappedBy: 'weapons')]
     private \Doctrine\Common\Collections\ArrayCollection|array $playableClasses;
 
     public function __construct()

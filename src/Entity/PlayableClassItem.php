@@ -7,41 +7,27 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=PlayableClassItemRepository::class)
- */
+#[ORM\Entity(repositoryClass: PlayableClassItemRepository::class)]
 class PlayableClassItem
 {
-    /**
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue
-     *
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
     #[Groups('read_class')]
     #[Assert\NotBlank]
     #[Assert\PositiveOrZero]
+    #[ORM\Column(type: 'integer')]
     private ?int $quantity = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=PlayableClass::class, inversedBy="playableClassItems")
-     *
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: PlayableClass::class, inversedBy: 'playableClassItems')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?\App\Entity\PlayableClass $playableClass = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Item::class, inversedBy="playableClassItems")
-     *
-     * @ORM\JoinColumn(nullable=false)
-     */
     #[Groups('read_class')]
+    #[ORM\ManyToOne(targetEntity: Item::class, inversedBy: 'playableClassItems')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?\App\Entity\Item $item = null;
 
     public function getId(): ?int

@@ -120,8 +120,8 @@ class UserController extends AbstractController
         SerializerInterface $serializer,
         EntityManagerInterface $em,
         ValidatorInterface $validator,
-        User $user = null,
-        JWTTokenManagerInterface $JWTManager
+        JWTTokenManagerInterface $JWTManager,
+        User $user = null
     ): JsonResponse {
         if ($user === null) {
             return $this->json('Utilisateur non trouvé', Response::HTTP_NOT_FOUND);
@@ -177,8 +177,8 @@ class UserController extends AbstractController
         EntityManagerInterface $em,
         ValidatorInterface $validator,
         UserPasswordHasherInterface $hasher,
-        User $user = null,
-        JWTTokenManagerInterface $JWTManager
+        JWTTokenManagerInterface $JWTManager,
+        User $user = null
     ): JsonResponse {
         if ($user === null) {
             return $this->json('Utilisateur non trouvé', Response::HTTP_NOT_FOUND);

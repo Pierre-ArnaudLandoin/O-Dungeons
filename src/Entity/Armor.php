@@ -9,68 +9,48 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=ArmorRepository::class)
- */
+#[ORM\Entity(repositoryClass: ArmorRepository::class)]
 class Armor
 {
-    /**
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue
-     *
-     * @ORM\Column(type="integer")
-     */
     #[Groups('read_class')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Groups('read_class')]
     #[Assert\NotBlank]
     #[Assert\Length(max: 255, maxMessage: 'Nombre de caractères autorisés dépassés ({{ value }}), maximum 255')]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $name = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Groups('read_class')]
     #[Assert\NotBlank]
     #[Assert\Length(max: 255, maxMessage: 'Nombre de caractères autorisés dépassés ({{ value }}), maximum 255')]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $armorType = null;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
     #[Groups('read_class')]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $armorClass = null;
 
-    /**
-     * @ORM\Column(type="integer", options={"default": 0})
-     */
     #[Groups('read_class')]
     #[Assert\NotBlank]
+    #[ORM\Column(type: 'integer', options: ['default' => 0])]
     private int $strength = 0;
 
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
     #[Groups('read_class')]
+    #[ORM\Column(type: 'string', length: 50, nullable: true)]
     private ?string $discretion = null;
 
-    /**
-     * @ORM\Column(type="float", options={"default": 0})
-     */
     #[Groups('read_class')]
     #[Assert\NotBlank]
     #[Assert\Type(type: 'float', message: 'La valeur doit être un nombre supérieur ou égal à 0.')]
     #[Assert\PositiveOrZero]
+    #[ORM\Column(type: 'float', options: ['default' => 0])]
     private ?float $weight = null;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=PlayableClass::class, mappedBy="armors")
-     */
+    #[ORM\ManyToMany(targetEntity: PlayableClass::class, mappedBy: 'armors')]
     private \Doctrine\Common\Collections\ArrayCollection|array $playableClasses;
 
     public function __construct()

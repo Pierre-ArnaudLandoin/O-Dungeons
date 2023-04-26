@@ -107,10 +107,9 @@ class RaceController extends AbstractController
 
     /**
      * This is one way to prevent users who are not granted to access this method/route.
-     *
-     * @IsGranted("ROLE_ADMIN")
      */
     #[Route(path: '/{id}', name: 'delete', methods: ['POST'], requirements: ['id' => '\d+'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(Request $request, Race $race, EntityManagerInterface $em): Response
     {
         // Pour supprimer le fichier png dans asset.

@@ -9,54 +9,39 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=RaceRepository::class)
- */
+#[ORM\Entity(repositoryClass: RaceRepository::class)]
 class Race
 {
-    /**
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue
-     *
-     * @ORM\Column(type="integer")
-     */
     #[Groups(['browse_race', 'read_race', 'read_subraces'])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Groups(['browse_race', 'read_race', 'read_subraces'])]
     #[Assert\NotBlank]
     #[Assert\Length(min: 2, max: 255, minMessage: 'Le nom de la race doit contenir au moins {{ limit }} caractères', maxMessage: 'Le nom de la race doit contenir au maximum {{ limit }} caractères')]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $name = null;
 
-    /**
-     * @ORM\Column(type="text")
-     */
     #[Groups('read_race')]
     #[Assert\NotBlank]
+    #[ORM\Column(type: 'text')]
     private ?string $fullDescription = null;
 
-    /**
-     * @ORM\Column(type="text")
-     */
     #[Groups(['browse_race', 'read_race'])]
     #[Assert\NotBlank]
+    #[ORM\Column(type: 'text')]
     private ?string $quickDescription = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Subrace::class, mappedBy="race", orphanRemoval=true)
-     */
     #[Groups('read_race')]
+    #[ORM\OneToMany(targetEntity: Subrace::class, mappedBy: 'race', orphanRemoval: true)]
     private \Doctrine\Common\Collections\ArrayCollection|array $subraces;
 
     /**
      * The URL to asset folder for this image.
-     *
-     * @ORM\Column(type="string", length=255)
      */
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $imageUrl = null;
 
     /**

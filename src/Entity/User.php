@@ -10,65 +10,48 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=UserRepository::class)
- */
 #[UniqueEntity('email')]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    /**
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue
-     *
-     * @ORM\Column(type="integer")
-     */
     #[Groups('read_user')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
     #[Assert\NotBlank]
     #[Assert\Email(message: "L'email '{{ value }}' n'est pas un email valide")]
     #[Groups('read_user')]
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
     private ?string $email = null;
 
     /**
-     * @ORM\Column(type="json")
-     *
      * @var string[]
      */
     #[Assert\NotBlank]
     #[Assert\Choice(choices: ['ROLE_USER', 'ROLE_MANAGER', 'ROLE_ADMIN', 'ROLE_SUPERADMIN'], multiple: true)]
     #[Groups('read_user')]
+    #[ORM\Column(type: 'json')]
     private array $roles = ['ROLE_USER'];
 
-    /**
-     * @ORM\Column(type="string")
-     */
     #[Assert\NotBlank]
     #[Assert\Length(min: 8, minMessage: 'Mot de passe inférieur à 8 caractères')]
+    #[ORM\Column(type: 'string')]
     private ?string $password = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Assert\NotBlank]
     #[Groups('read_user')]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $lastName = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Assert\NotBlank]
     #[Groups('read_user')]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $firstName = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Avatar::class, inversedBy="users")
-     */
     #[Groups('read_user')]
+    #[ORM\ManyToOne(targetEntity: Avatar::class, inversedBy: 'users')]
     private ?\App\Entity\Avatar $avatar = null;
 
     /**
