@@ -40,7 +40,7 @@ class Background
 
     #[Groups('read_backgrounds')]
     #[ORM\ManyToMany(targetEntity: Item::class, inversedBy: 'backgrounds')]
-    private ArrayCollection|array $items;
+    private Collection $items;
 
     #[Groups('read_backgrounds')]
     #[Assert\PositiveOrZero]

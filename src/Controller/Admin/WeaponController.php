@@ -41,7 +41,7 @@ class WeaponController extends AbstractController
             return $this->redirectToRoute('app_admin_weapon_read', ['id' => $weapon->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/weapon/add.html.twig', [
+        return $this->render('admin/weapon/add.html.twig', [
             'weapon' => $weapon,
             'form' => $form,
             'controller' => 'WeaponController',
@@ -69,7 +69,7 @@ class WeaponController extends AbstractController
             return $this->redirectToRoute('app_admin_weapon_read', ['id' => $weapon->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/weapon/edit.html.twig', [
+        return $this->render('admin/weapon/edit.html.twig', [
             'weapon' => $weapon,
             'form' => $form,
             'controller' => 'WeaponController',

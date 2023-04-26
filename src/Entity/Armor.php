@@ -51,7 +51,7 @@ class Armor
     private ?float $weight = null;
 
     #[ORM\ManyToMany(targetEntity: PlayableClass::class, mappedBy: 'armors')]
-    private ArrayCollection|array $playableClasses;
+    private Collection $playableClasses;
 
     public function __construct()
     {

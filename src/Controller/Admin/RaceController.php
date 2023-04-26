@@ -58,7 +58,7 @@ class RaceController extends AbstractController
         }
 
         // Managing GET method
-        return $this->renderForm('admin/race/add.html.twig', [
+        return $this->render('admin/race/add.html.twig', [
             'race' => $race,
             'form' => $form,
             'controller' => 'RaceController',
@@ -97,7 +97,7 @@ class RaceController extends AbstractController
         }
 
         // Managing GET method
-        return $this->renderForm('admin/race/add.html.twig', [
+        return $this->render('admin/race/add.html.twig', [
             'race' => $race,
             'form' => $form,
             'controller' => 'RaceController',
@@ -109,7 +109,7 @@ class RaceController extends AbstractController
      * This is one way to prevent users who are not granted to access this method/route.
      */
     #[Route(path: '/{id}', name: 'delete', methods: ['POST'], requirements: ['id' => '\d+'])]
-    #[IsGranted('ROLE_ADMIN')]
+    #[\Symfony\Component\Security\Http\Attribute\IsGranted('ROLE_ADMIN')]
     public function delete(Request $request, Race $race, EntityManagerInterface $em): Response
     {
         // Pour supprimer le fichier png dans asset.

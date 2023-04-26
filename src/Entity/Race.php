@@ -36,7 +36,7 @@ class Race
 
     #[Groups('read_race')]
     #[ORM\OneToMany(mappedBy: 'race', targetEntity: Subrace::class, orphanRemoval: true)]
-    private ArrayCollection|array $subraces;
+    private Collection $subraces;
 
     /**
      * The URL to asset folder for this image.

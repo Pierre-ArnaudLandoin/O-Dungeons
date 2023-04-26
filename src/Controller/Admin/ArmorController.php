@@ -41,7 +41,7 @@ class ArmorController extends AbstractController
             return $this->redirectToRoute('app_admin_armor_show', ['id' => $armor->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/armor/new.html.twig', [
+        return $this->render('admin/armor/new.html.twig', [
             'armor' => $armor,
             'form' => $form,
             'controller' => 'ArmorController',
@@ -69,7 +69,7 @@ class ArmorController extends AbstractController
             return $this->redirectToRoute('app_admin_armor_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/armor/edit.html.twig', [
+        return $this->render('admin/armor/edit.html.twig', [
             'armor' => $armor,
             'form' => $form,
             'controller' => 'ArmorController',

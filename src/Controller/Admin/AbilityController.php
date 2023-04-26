@@ -41,7 +41,7 @@ class AbilityController extends AbstractController
             return $this->redirectToRoute('app_admin_ability_show', ['id' => $ability->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/ability/new.html.twig', [
+        return $this->render('admin/ability/new.html.twig', [
             'ability' => $ability,
             'form' => $form,
             'controller' => 'AbilityController',
@@ -69,7 +69,7 @@ class AbilityController extends AbstractController
             return $this->redirectToRoute('app_admin_ability_index', ['id' => $ability->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/ability/edit.html.twig', [
+        return $this->render('admin/ability/edit.html.twig', [
             'ability' => $ability,
             'form' => $form,
             'controller' => 'AbilityController',

@@ -54,22 +54,22 @@ class PlayableClass
 
     #[Groups('read_class')]
     #[ORM\OneToMany(mappedBy: 'playableClass', targetEntity: Subclass::class, orphanRemoval: true)]
-    private ArrayCollection|array $subclasses;
+    private Collection $subclasses;
 
     #[ORM\ManyToMany(targetEntity: Ability::class, inversedBy: 'playableClasses')]
-    private ArrayCollection|array $abilities;
+    private Collection $abilities;
 
     #[Groups('read_class')]
     #[ORM\ManyToMany(targetEntity: Armor::class, inversedBy: 'playableClasses')]
-    private ArrayCollection|array $armors;
+    private Collection $armors;
 
     #[Groups('read_class')]
     #[ORM\ManyToMany(targetEntity: Weapon::class, inversedBy: 'playableClasses')]
-    private ArrayCollection|array $weapons;
+    private Collection $weapons;
 
     #[Groups('read_class')]
     #[ORM\OneToMany(mappedBy: 'playableClass', targetEntity: PlayableClassItem::class, cascade: ['persist'], orphanRemoval: true)]
-    private ArrayCollection|array $playableClassItems;
+    private Collection $playableClassItems;
 
     #[Groups('browse_class')]
     #[ORM\Column(type: 'text')]

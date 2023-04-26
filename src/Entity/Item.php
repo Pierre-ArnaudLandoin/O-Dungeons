@@ -30,10 +30,10 @@ class Item
     private ?float $weight = null;
 
     #[ORM\ManyToMany(targetEntity: Background::class, mappedBy: 'items')]
-    private ArrayCollection|array $backgrounds;
+    private Collection $backgrounds;
 
     #[ORM\OneToMany(mappedBy: 'item', targetEntity: PlayableClassItem::class, orphanRemoval: true)]
-    private ArrayCollection|array $playableClassItems;
+    private Collection $playableClassItems;
 
     public function __construct()
     {

@@ -53,7 +53,7 @@ class Ability
     private ?string $duration = null;
 
     #[ORM\ManyToMany(targetEntity: PlayableClass::class, mappedBy: 'abilities')]
-    private ArrayCollection|array $playableClasses;
+    private Collection $playableClasses;
 
     public function __construct()
     {

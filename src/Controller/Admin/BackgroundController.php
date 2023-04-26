@@ -41,7 +41,7 @@ class BackgroundController extends AbstractController
             return $this->redirectToRoute('app_admin_background_show', ['id' => $background->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/background/new.html.twig', [
+        return $this->render('admin/background/new.html.twig', [
             'background' => $background,
             'form' => $form,
             'controller' => 'BackgroundController',
@@ -69,7 +69,7 @@ class BackgroundController extends AbstractController
             return $this->redirectToRoute('app_admin_background_index', ['id' => $background->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/background/edit.html.twig', [
+        return $this->render('admin/background/edit.html.twig', [
             'background' => $background,
             'form' => $form,
             'controller' => 'BackgroundController',

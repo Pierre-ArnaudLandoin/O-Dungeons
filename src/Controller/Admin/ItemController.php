@@ -41,7 +41,7 @@ class ItemController extends AbstractController
             return $this->redirectToRoute('app_admin_item_show', ['id' => $item->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/item/new.html.twig', [
+        return $this->render('admin/item/new.html.twig', [
             'item' => $item,
             'form' => $form,
             'controller' => 'ItemController',
@@ -69,7 +69,7 @@ class ItemController extends AbstractController
             return $this->redirectToRoute('app_admin_item_show', ['id' => $item->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/item/edit.html.twig', [
+        return $this->render('admin/item/edit.html.twig', [
             'item' => $item,
             'form' => $form,
             'controller' => 'ItemController',

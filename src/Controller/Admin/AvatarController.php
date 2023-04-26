@@ -46,7 +46,7 @@ class AvatarController extends AbstractController
             return $this->redirectToRoute('app_admin_avatars_read', ['id' => $avatar->getId()]);
         }
 
-        return $this->renderForm('admin/avatar/add.html.twig', [
+        return $this->render('admin/avatar/add.html.twig', [
             'controller' => 'AvatarController',
             'title' => 'Modifier',
             'avatar' => $avatar,
@@ -69,7 +69,7 @@ class AvatarController extends AbstractController
             return $this->redirectToRoute('app_admin_avatars_read', ['id' => $avatar->getId()]);
         }
 
-        return $this->renderForm('admin/avatar/add.html.twig', [
+        return $this->render('admin/avatar/add.html.twig', [
             'controller' => 'AvatarController',
             'title' => 'Ajouter',
             'avatar' => $avatar,

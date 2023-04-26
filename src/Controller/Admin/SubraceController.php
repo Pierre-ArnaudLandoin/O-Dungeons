@@ -57,7 +57,7 @@ class SubraceController extends AbstractController
         }
 
         // Managing GET method
-        return $this->renderForm('admin/subrace/add.html.twig', [
+        return $this->render('admin/subrace/add.html.twig', [
             'subrace' => $subrace,
             'form' => $form,
             'controller' => 'SubraceController',
@@ -90,7 +90,7 @@ class SubraceController extends AbstractController
 
         // If no, gives an empty form
         // Managing GET method
-        return $this->renderForm('admin/subrace/add.html.twig', [
+        return $this->render('admin/subrace/add.html.twig', [
             'form' => $form,
             'subrace' => $subrace,
             'controller' => 'SubraceController',

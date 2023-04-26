@@ -41,7 +41,7 @@ class SubclassController extends AbstractController
             return $this->redirectToRoute('app_admin_subclass_show', ['id' => $subclass->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/subclass/new.html.twig', [
+        return $this->render('admin/subclass/new.html.twig', [
             'subclass' => $subclass,
             'form' => $form,
             'controller' => 'SubclassController',
@@ -69,7 +69,7 @@ class SubclassController extends AbstractController
             return $this->redirectToRoute('app_admin_subclass_show', ['id' => $subclass->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/subclass/edit.html.twig', [
+        return $this->render('admin/subclass/edit.html.twig', [
             'subclass' => $subclass,
             'form' => $form,
             'controller' => 'SubclassController',

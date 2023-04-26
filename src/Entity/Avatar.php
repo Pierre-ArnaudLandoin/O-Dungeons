@@ -30,7 +30,7 @@ class Avatar
     private ?string $imageUrl = null;
 
     #[ORM\OneToMany(mappedBy: 'avatar', targetEntity: User::class)]
-    private ArrayCollection|array $users;
+    private Collection $users;
 
     public function __construct()
     {

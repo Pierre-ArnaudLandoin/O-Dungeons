@@ -50,7 +50,7 @@ class Weapon
     private ?string $property = null;
 
     #[ORM\ManyToMany(targetEntity: PlayableClass::class, mappedBy: 'weapons')]
-    private ArrayCollection|array $playableClasses;
+    private Collection $playableClasses;
 
     public function __construct()
     {

@@ -54,7 +54,7 @@ class PlayableClassController extends AbstractController
             }
         }
 
-        return $this->renderForm('admin/playable_class/new.html.twig', [
+        return $this->render('admin/playable_class/new.html.twig', [
             'playable_class' => $playableClass,
             'form' => $form,
             'controller' => 'PlayableClassController',
@@ -89,7 +89,7 @@ class PlayableClassController extends AbstractController
             return $this->redirectToRoute('app_admin_playable_class_show', ['id' => $playableClass->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/playable_class/edit.html.twig', [
+        return $this->render('admin/playable_class/edit.html.twig', [
             'playable_class' => $playableClass,
             'form' => $form,
             'controller' => 'PlayableClassController',
