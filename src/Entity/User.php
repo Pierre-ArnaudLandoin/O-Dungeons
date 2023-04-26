@@ -18,7 +18,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id;
 
     #[Assert\NotBlank]
     #[Assert\Email(message: "L'email '{{ value }}' n'est pas un email valide")]
@@ -52,7 +52,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[Groups('read_user')]
     #[ORM\ManyToOne(targetEntity: Avatar::class, inversedBy: 'users')]
-    private ?\App\Entity\Avatar $avatar = null;
+    private ?Avatar $avatar = null;
 
     /**
      * Constructor.

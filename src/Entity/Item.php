@@ -16,7 +16,7 @@ class Item
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id;
 
     #[Groups(['read_class', 'read_backgrounds'])]
     #[Assert\NotBlank]
@@ -30,10 +30,10 @@ class Item
     private ?float $weight = null;
 
     #[ORM\ManyToMany(targetEntity: Background::class, mappedBy: 'items')]
-    private \Doctrine\Common\Collections\ArrayCollection|array $backgrounds;
+    private ArrayCollection|array $backgrounds;
 
-    #[ORM\OneToMany(targetEntity: PlayableClassItem::class, mappedBy: 'item', orphanRemoval: true)]
-    private \Doctrine\Common\Collections\ArrayCollection|array $playableClassItems;
+    #[ORM\OneToMany(mappedBy: 'item', targetEntity: PlayableClassItem::class, orphanRemoval: true)]
+    private ArrayCollection|array $playableClassItems;
 
     public function __construct()
     {

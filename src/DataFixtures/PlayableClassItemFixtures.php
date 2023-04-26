@@ -391,6 +391,6 @@ class PlayableClassItemFixtures extends Fixture implements DependentFixtureInter
     public function getDependencies()
     {
         return [ItemFixtures::class,
-                PlayableClassFixtures::class];
+            PlayableClassFixtures::class];
     }
 }

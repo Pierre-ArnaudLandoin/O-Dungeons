@@ -18,7 +18,8 @@ class WeaponController extends AbstractController
     {
         $weapons = $entityManager
             ->getRepository(Weapon::class)
-            ->findAll();
+            ->findAll()
+        ;
 
         return $this->render('admin/weapon/index.html.twig', [
             'weapons' => $weapons,

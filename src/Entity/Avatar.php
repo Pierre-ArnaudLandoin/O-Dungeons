@@ -16,7 +16,7 @@ class Avatar
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id;
 
     #[Groups(['browse_avatars', 'read_user'])]
     #[Assert\NotBlank]
@@ -29,8 +29,8 @@ class Avatar
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $imageUrl = null;
 
-    #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'avatar')]
-    private \Doctrine\Common\Collections\ArrayCollection|array $users;
+    #[ORM\OneToMany(mappedBy: 'avatar', targetEntity: User::class)]
+    private ArrayCollection|array $users;
 
     public function __construct()
     {

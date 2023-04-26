@@ -11,8 +11,8 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<Race>
  *
- * @method Race|null find($id, $lockMode = null, $lockVersion = null)
- * @method Race|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|Race find($id, $lockMode = null, $lockVersion = null)
+ * @method null|Race findOneBy(array $criteria, array $orderBy = null)
  * @method Race[]    findAll()
  * @method Race[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -57,7 +57,8 @@ class RaceRepository extends ServiceEntityRepository
             FROM App\Entity\Race raceEntity
             ORDER BY RAND()
             ')
-            ->setMaxResults(2);
+            ->setMaxResults(2)
+        ;
 
         return $query->getResult();
     }

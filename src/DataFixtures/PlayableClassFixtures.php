@@ -238,7 +238,7 @@ Les roublards jouissent d'une expertise à laquelle peu d'aventuriers peuvent pr
     public function getDependencies()
     {
         return [AbilityFixtures::class,
-                ArmorFixtures::class,
-                WeaponFixtures::class];
+            ArmorFixtures::class,
+            WeaponFixtures::class];
     }
 }

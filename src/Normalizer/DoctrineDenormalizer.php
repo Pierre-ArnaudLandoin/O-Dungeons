@@ -28,8 +28,9 @@ class DoctrineDenormalizer implements DenormalizerInterface
 
     /**
      * {@inheritDoc}
+     * @return mixed
      */
-    public function denormalize($data, $type, $format = null, array $context = [])
+    public function denormalize($data, $type, $format = null, array $context = []): mixed
     {
         return $this->em->find($type, $data);
     }

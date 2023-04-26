@@ -38,6 +38,7 @@ class UserVoter extends Voter
                 if ($user->getId() === $subject->getId()) {
                     return true;
                 }
+
                 break;
         }
 

@@ -13,7 +13,7 @@ class PlayableClassItem
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id;
 
     #[Groups('read_class')]
     #[Assert\NotBlank]
@@ -23,12 +23,12 @@ class PlayableClassItem
 
     #[ORM\ManyToOne(targetEntity: PlayableClass::class, inversedBy: 'playableClassItems')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?\App\Entity\PlayableClass $playableClass = null;
+    private ?PlayableClass $playableClass = null;
 
     #[Groups('read_class')]
     #[ORM\ManyToOne(targetEntity: Item::class, inversedBy: 'playableClassItems')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?\App\Entity\Item $item = null;
+    private ?Item $item = null;
 
     public function getId(): ?int
     {

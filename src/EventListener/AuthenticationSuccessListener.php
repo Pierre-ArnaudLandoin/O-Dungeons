@@ -14,6 +14,7 @@ class AuthenticationSuccessListener
     public function onAuthenticationSuccessResponse(AuthenticationSuccessEvent $event): void
     {
         $data = $event->getData();
+
         /**
          * @var User $user
          */

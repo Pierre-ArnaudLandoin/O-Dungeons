@@ -16,7 +16,7 @@ class Race
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id;
 
     #[Groups(['browse_race', 'read_race', 'read_subraces'])]
     #[Assert\NotBlank]
@@ -35,8 +35,8 @@ class Race
     private ?string $quickDescription = null;
 
     #[Groups('read_race')]
-    #[ORM\OneToMany(targetEntity: Subrace::class, mappedBy: 'race', orphanRemoval: true)]
-    private \Doctrine\Common\Collections\ArrayCollection|array $subraces;
+    #[ORM\OneToMany(mappedBy: 'race', targetEntity: Subrace::class, orphanRemoval: true)]
+    private ArrayCollection|array $subraces;
 
     /**
      * The URL to asset folder for this image.
@@ -177,6 +177,8 @@ class Race
 
     /**
      * Set the value of imageFile.
+     *
+     * @param mixed $imageFile
      *
      * @return self
      */

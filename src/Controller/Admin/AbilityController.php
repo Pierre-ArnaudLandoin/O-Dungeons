@@ -18,7 +18,8 @@ class AbilityController extends AbstractController
     {
         $abilities = $entityManager
             ->getRepository(Ability::class)
-            ->findAll();
+            ->findAll()
+        ;
 
         return $this->render('admin/ability/index.html.twig', [
             'abilities' => $abilities,

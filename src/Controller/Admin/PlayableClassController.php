@@ -19,7 +19,8 @@ class PlayableClassController extends AbstractController
     {
         $playableClasses = $entityManager
             ->getRepository(PlayableClass::class)
-            ->findAll();
+            ->findAll()
+        ;
 
         return $this->render('admin/playable_class/index.html.twig', [
             'playable_classes' => $playableClasses,

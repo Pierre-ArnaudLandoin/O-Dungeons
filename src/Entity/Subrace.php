@@ -14,7 +14,7 @@ class Subrace
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id;
 
     #[Groups(['read_race', 'browse_subraces', 'read_subraces'])]
     #[Assert\NotBlank]
@@ -77,7 +77,7 @@ class Subrace
     #[Groups('read_subraces')]
     #[ORM\ManyToOne(targetEntity: Race::class, inversedBy: 'subraces')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?\App\Entity\Race $race = null;
+    private ?Race $race = null;
 
     public function getId(): ?int
     {

@@ -18,7 +18,8 @@ class SubclassController extends AbstractController
     {
         $subclasses = $entityManager
             ->getRepository(Subclass::class)
-            ->findAll();
+            ->findAll()
+        ;
 
         return $this->render('admin/subclass/index.html.twig', [
             'subclasses' => $subclasses,

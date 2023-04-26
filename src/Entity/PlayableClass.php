@@ -16,7 +16,7 @@ class PlayableClass
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id;
 
     #[Groups(['browse_class', 'read_class'])]
     #[Assert\NotBlank]
@@ -53,23 +53,23 @@ class PlayableClass
     private $imageFile;
 
     #[Groups('read_class')]
-    #[ORM\OneToMany(targetEntity: Subclass::class, mappedBy: 'playableClass', orphanRemoval: true)]
-    private \Doctrine\Common\Collections\ArrayCollection|array $subclasses;
+    #[ORM\OneToMany(mappedBy: 'playableClass', targetEntity: Subclass::class, orphanRemoval: true)]
+    private ArrayCollection|array $subclasses;
 
     #[ORM\ManyToMany(targetEntity: Ability::class, inversedBy: 'playableClasses')]
-    private \Doctrine\Common\Collections\ArrayCollection|array $abilities;
+    private ArrayCollection|array $abilities;
 
     #[Groups('read_class')]
     #[ORM\ManyToMany(targetEntity: Armor::class, inversedBy: 'playableClasses')]
-    private \Doctrine\Common\Collections\ArrayCollection|array $armors;
+    private ArrayCollection|array $armors;
 
     #[Groups('read_class')]
     #[ORM\ManyToMany(targetEntity: Weapon::class, inversedBy: 'playableClasses')]
-    private \Doctrine\Common\Collections\ArrayCollection|array $weapons;
+    private ArrayCollection|array $weapons;
 
     #[Groups('read_class')]
-    #[ORM\OneToMany(targetEntity: PlayableClassItem::class, mappedBy: 'playableClass', orphanRemoval: true, cascade: ['persist'])]
-    private \Doctrine\Common\Collections\ArrayCollection|array $playableClassItems;
+    #[ORM\OneToMany(mappedBy: 'playableClass', targetEntity: PlayableClassItem::class, cascade: ['persist'], orphanRemoval: true)]
+    private ArrayCollection|array $playableClassItems;
 
     #[Groups('browse_class')]
     #[ORM\Column(type: 'text')]
@@ -303,6 +303,8 @@ class PlayableClass
 
     /**
      * Set the.
+     *
+     * @param mixed $imageFile
      *
      * @return self
      */

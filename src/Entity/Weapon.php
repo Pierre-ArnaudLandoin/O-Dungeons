@@ -16,7 +16,7 @@ class Weapon
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id;
 
     #[Groups('read_class')]
     #[Assert\NotBlank]
@@ -50,7 +50,7 @@ class Weapon
     private ?string $property = null;
 
     #[ORM\ManyToMany(targetEntity: PlayableClass::class, mappedBy: 'weapons')]
-    private \Doctrine\Common\Collections\ArrayCollection|array $playableClasses;
+    private ArrayCollection|array $playableClasses;
 
     public function __construct()
     {

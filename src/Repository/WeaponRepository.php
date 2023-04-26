@@ -11,8 +11,8 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<Weapon>
  *
- * @method Weapon|null find($id, $lockMode = null, $lockVersion = null)
- * @method Weapon|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|Weapon find($id, $lockMode = null, $lockVersion = null)
+ * @method null|Weapon findOneBy(array $criteria, array $orderBy = null)
  * @method Weapon[]    findAll()
  * @method Weapon[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */

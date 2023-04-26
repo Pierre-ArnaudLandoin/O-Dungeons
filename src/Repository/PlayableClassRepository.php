@@ -11,8 +11,8 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<PlayableClass>
  *
- * @method PlayableClass|null find($id, $lockMode = null, $lockVersion = null)
- * @method PlayableClass|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|PlayableClass find($id, $lockMode = null, $lockVersion = null)
+ * @method null|PlayableClass findOneBy(array $criteria, array $orderBy = null)
  * @method PlayableClass[]    findAll()
  * @method PlayableClass[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -58,7 +58,8 @@ class PlayableClassRepository extends ServiceEntityRepository
             FROM App\Entity\PlayableClass classEntity
             ORDER BY RAND()
             ')
-            ->setMaxResults(2);
+            ->setMaxResults(2)
+        ;
 
         return $query->getResult();
     }

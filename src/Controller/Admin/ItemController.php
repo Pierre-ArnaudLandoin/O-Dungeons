@@ -18,7 +18,8 @@ class ItemController extends AbstractController
     {
         $items = $entityManager
             ->getRepository(Item::class)
-            ->findAll();
+            ->findAll()
+        ;
 
         return $this->render('admin/item/index.html.twig', [
             'items' => $items,

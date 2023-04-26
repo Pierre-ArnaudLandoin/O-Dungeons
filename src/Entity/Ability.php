@@ -16,7 +16,7 @@ class Ability
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id;
 
     #[Groups(['browse_abilities', 'read_abilities'])]
     #[Assert\NotBlank]
@@ -53,7 +53,7 @@ class Ability
     private ?string $duration = null;
 
     #[ORM\ManyToMany(targetEntity: PlayableClass::class, mappedBy: 'abilities')]
-    private \Doctrine\Common\Collections\ArrayCollection|array $playableClasses;
+    private ArrayCollection|array $playableClasses;
 
     public function __construct()
     {

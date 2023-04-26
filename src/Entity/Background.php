@@ -16,7 +16,7 @@ class Background
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id;
 
     #[Groups(['browse_backgrounds', 'read_backgrounds'])]
     #[Assert\NotBlank]
@@ -40,7 +40,7 @@ class Background
 
     #[Groups('read_backgrounds')]
     #[ORM\ManyToMany(targetEntity: Item::class, inversedBy: 'backgrounds')]
-    private \Doctrine\Common\Collections\ArrayCollection|array $items;
+    private ArrayCollection|array $items;
 
     #[Groups('read_backgrounds')]
     #[Assert\PositiveOrZero]

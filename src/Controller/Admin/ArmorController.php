@@ -18,7 +18,8 @@ class ArmorController extends AbstractController
     {
         $armors = $entityManager
             ->getRepository(Armor::class)
-            ->findAll();
+            ->findAll()
+        ;
 
         return $this->render('admin/armor/index.html.twig', [
             'armors' => $armors,

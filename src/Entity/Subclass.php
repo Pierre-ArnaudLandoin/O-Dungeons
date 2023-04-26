@@ -14,7 +14,7 @@ class Subclass
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id;
 
     #[Groups('read_class')]
     #[Assert\NotBlank]
@@ -29,7 +29,7 @@ class Subclass
 
     #[ORM\ManyToOne(targetEntity: PlayableClass::class, inversedBy: 'subclasses')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?\App\Entity\PlayableClass $playableClass = null;
+    private ?PlayableClass $playableClass = null;
 
     public function getId(): ?int
     {

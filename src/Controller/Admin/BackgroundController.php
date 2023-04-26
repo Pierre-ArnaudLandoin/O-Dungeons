@@ -18,7 +18,8 @@ class BackgroundController extends AbstractController
     {
         $backgrounds = $entityManager
             ->getRepository(Background::class)
-            ->findAll();
+            ->findAll()
+        ;
 
         return $this->render('admin/background/index.html.twig', [
             'backgrounds' => $backgrounds,

@@ -21,13 +21,13 @@ class OdungeonsAuthenticator extends AbstractLoginFormAuthenticator
 
     final public const LOGIN_ROUTE = 'app_login';
 
+    public function __construct(private readonly UrlGeneratorInterface $urlGenerator)
+    {
+    }
+
     public function supports(Request $request): bool
     {
         return $request->isMethod('POST') && '/login' === $request->getPathInfo();
-    }
-
-    public function __construct(private readonly UrlGeneratorInterface $urlGenerator)
-    {
     }
 
     public function authenticate(Request $request): Passport

@@ -11,8 +11,8 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<Subclass>
  *
- * @method Subclass|null find($id, $lockMode = null, $lockVersion = null)
- * @method Subclass|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|Subclass find($id, $lockMode = null, $lockVersion = null)
+ * @method null|Subclass findOneBy(array $criteria, array $orderBy = null)
  * @method Subclass[]    findAll()
  * @method Subclass[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
