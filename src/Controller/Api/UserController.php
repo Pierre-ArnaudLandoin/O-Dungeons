@@ -2,44 +2,46 @@
 
 namespace App\Controller\Api;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use OpenApi\Annotations as OA;
 use App\Entity\User;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use Nelmio\ApiDocBundle\Annotation\Security;
 use App\Form\UserAddType;
 use App\Form\UserEditType;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
+use OpenApi\Annotations as OA;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Security\Core\Validator\Constraints\UserPasswordValidator;
 
 /**
- * @Route("/api/users", name="app_api_users_")
  * @OA\Tag(name="O'Dungeons Api: Utilisateurs")
  */
+#[Route(path: '/api/users', name: 'app_api_users_')]
 class UserController extends AbstractController
 {
     /**
-     * @Route("", name="add", methods={"POST"})
-     * 
      * @OA\Response(
      *      response=201,
      *      description="Retourne l'utilisateur créé avec son token JWT",
-     *      @Model(type=User::class, groups={"read_user"})      
+     *
+     *      @Model(type=User::class, groups={"read_user"})
      * )
+     *
      * @OA\RequestBody(
+     *
      *      @Model(type=UserAddType::class)
      * )
+     *
      * @Security(name=null)
      */
+    #[Route(path: '', name: 'add', methods: ['POST'])]
     public function add(
         Request $request,
         SerializerInterface $serializer,
@@ -47,20 +49,19 @@ class UserController extends AbstractController
         ValidatorInterface $validator,
         UserPasswordHasherInterface $hasher,
         JWTTokenManagerInterface $JWTManager
-    ): JsonResponse
-    {
+    ): JsonResponse {
         try {
             $user = $serializer->deserialize($request->getContent(), User::class, 'json');
-        } catch (Exception $e) {
+        } catch (Exception) {
             return $this->json(
-                "JSON mal formé",
+                'JSON mal formé',
                 Response::HTTP_UNPROCESSABLE_ENTITY
             );
-        }        
-        
+        }
+
         $errorList = $validator->validate($user);
 
-        if (count($errorList)>0) {
+        if (count($errorList) > 0) {
             return $this->json($errorList, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
@@ -75,41 +76,45 @@ class UserController extends AbstractController
         $em->persist($user);
         $em->flush();
 
-        return $this->json(['token' => $JWTManager->create($user), 'user' => $user], Response::HTTP_CREATED, [], ["groups" => "read_user"]);
+        return $this->json(['token' => $JWTManager->create($user), 'user' => $user], Response::HTTP_CREATED, [], ['groups' => 'read_user']);
     }
 
     /**
-     * Récupère l'utilisateur avec son id
-     * @Route("/{id}", name="read", methods={"GET"}, requirements={"id": "\d+"})
+     * Récupère l'utilisateur avec son id.
+     *
      * @OA\Response(
      *      response=200,
      *      description="Retourne l'utilisateur demandé via l'id",
+     *
      *      @Model(type=User::class, groups={"read_user"})
      * )
      */
-    public function read(User $user = null) : JsonResponse
+    #[Route(path: '/{id}', name: 'read', methods: ['GET'], requirements: ['id' => '\d+'])]
+    public function read(User $user = null): JsonResponse
     {
         if ($user === null) {
             return $this->json("L'utilisateur demandé n'a pas été trouvé", Response::HTTP_NOT_FOUND);
         }
-        
+
         $this->denyAccessUnlessGranted('PROFIL_VIEW', $user);
 
-        return $this->json($user, Response::HTTP_OK, [], ["groups" => "read_user"]);
+        return $this->json($user, Response::HTTP_OK, [], ['groups' => 'read_user']);
     }
 
     /**
-     * @Route("/{id}", name="edit", methods={"PUT"}, requirements={"id": "\d+"})
-     * 
      * @OA\Response(
      *      response=200,
      *      description="Retourne l'utilisateur modifié",
-     *      @Model(type=User::class, groups={"read_user"})      
+     *
+     *      @Model(type=User::class, groups={"read_user"})
      * )
+     *
      * @OA\RequestBody(
+     *
      *      @Model(type=UserEditType::class)
      * )
      */
+    #[Route(path: '/{id}', name: 'edit', methods: ['PUT'], requirements: ['id' => '\d+'])]
     public function edit(
         Request $request,
         SerializerInterface $serializer,
@@ -117,84 +122,83 @@ class UserController extends AbstractController
         ValidatorInterface $validator,
         User $user = null,
         JWTTokenManagerInterface $JWTManager
-    ): JsonResponse
-    {
+    ): JsonResponse {
         if ($user === null) {
-            return $this->json("Utilisateur non trouvé", Response::HTTP_NOT_FOUND);
+            return $this->json('Utilisateur non trouvé', Response::HTTP_NOT_FOUND);
         }
 
         try {
             $userNew = $serializer->deserialize($request->getContent(), User::class, 'json');
-        } catch (Exception $e) {
+        } catch (Exception) {
             return $this->json(
-                "JSON mal formé",
+                'JSON mal formé',
                 Response::HTTP_UNPROCESSABLE_ENTITY
             );
-        };
+        }
 
         $user->setEmail($userNew->getEmail());
         $user->setLastName($userNew->getLastName());
         $user->setFirstName($userNew->getFirstName());
         $user->setAvatar($userNew->getAvatar());
         $errorList = $validator->validate($user);
-        
-        if (count($errorList)>0) {
+
+        if (count($errorList) > 0) {
             return $this->json($errorList, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        $this->denyAccessUnlessGranted("PROFIL_EDIT", $user);
+        $this->denyAccessUnlessGranted('PROFIL_EDIT', $user);
 
         $em->flush();
 
-        return $this->json(['token' => $JWTManager->create($user), 'user' => $user], Response::HTTP_OK, [], ["groups" => "read_user"]);
+        return $this->json(['token' => $JWTManager->create($user), 'user' => $user], Response::HTTP_OK, [], ['groups' => 'read_user']);
     }
 
     /**
-     * @Route("/{id}/password", name="editPassword", methods={"PATCH"}, requirements={"id": "\d+"})
-     * 
      * @OA\Response(
      *      response=200,
      *      description="Retourne l'utilisateur modifié",
-     *      @Model(type=User::class, groups={"read_user"})      
+     *
+     *      @Model(type=User::class, groups={"read_user"})
      * )
+     *
      * @OA\RequestBody(
+     *
      *      @OA\JsonContent(
      *          example={
      *             "oldPassword": "old",
      *             "newPassword": "new"
      *         }
-     *      )      
+     *      )
      * )
      */
+    #[Route(path: '/{id}/password', name: 'editPassword', methods: ['PATCH'], requirements: ['id' => '\d+'])]
     public function editPassword(
         Request $request,
         EntityManagerInterface $em,
         ValidatorInterface $validator,
+        UserPasswordHasherInterface $hasher,
         User $user = null,
-        JWTTokenManagerInterface $JWTManager,
-        UserPasswordHasherInterface $hasher
-    ): JsonResponse
-    {
+        JWTTokenManagerInterface $JWTManager
+    ): JsonResponse {
         if ($user === null) {
-            return $this->json("Utilisateur non trouvé", Response::HTTP_NOT_FOUND);
+            return $this->json('Utilisateur non trouvé', Response::HTTP_NOT_FOUND);
         }
 
         try {
-            $passwords = json_decode($request->getContent());
-        } catch (Exception $e) {
+            $passwords = json_decode($request->getContent(), null, 512, JSON_THROW_ON_ERROR);
+        } catch (Exception) {
             return $this->json(
-                "JSON mal formé",
+                'JSON mal formé',
                 Response::HTTP_UNPROCESSABLE_ENTITY
             );
-        };
-        
-        if($hasher->isPasswordValid($user, $passwords->oldPassword)){
+        }
 
+        if ($hasher->isPasswordValid($user, $passwords->oldPassword)) {
             $user->setPassword($passwords->newPassword);
 
             $errorList = $validator->validate($user);
-                    
-            if (count($errorList)>0) {
+
+            if (count($errorList) > 0) {
                 return $this->json($errorList, Response::HTTP_UNPROCESSABLE_ENTITY);
             }
 
@@ -202,17 +206,16 @@ class UserController extends AbstractController
                 $user,
                 $passwords->newPassword
             );
-    
+
             $user->setPassword($hashedPassword);
-        }
-        else {
-            return $this->json("Invalid credentials.", Response::HTTP_UNAUTHORIZED);
+        } else {
+            return $this->json('Invalid credentials.', Response::HTTP_UNAUTHORIZED);
         }
 
-        $this->denyAccessUnlessGranted("PROFIL_EDIT", $user);
+        $this->denyAccessUnlessGranted('PROFIL_EDIT', $user);
 
         $em->flush();
 
-        return $this->json(['token' => $JWTManager->create($user), 'user' => $user], Response::HTTP_OK, [], ["groups" => "read_user"]);
+        return $this->json(['token' => $JWTManager->create($user), 'user' => $user], Response::HTTP_OK, [], ['groups' => 'read_user']);
     }
 }

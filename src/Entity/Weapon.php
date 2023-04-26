@@ -16,61 +16,61 @@ class Weapon
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
-     * @Groups("read_class")
      */
+    #[Groups('read_class')]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("read_class")
-     * @Assert\NotBlank
-     * @Assert\Length(max=255, maxMessage="Nombre de caractères autorisés dépassés ({{ value }}), maximum 255")
      */
-    private $name;
+    #[Groups('read_class')]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255, maxMessage: 'Nombre de caractères autorisés dépassés ({{ value }}), maximum 255')]
+    private ?string $name = null;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("read_class")
-     * @Assert\NotBlank
      */
-    private $type;
+    #[Groups('read_class')]
+    #[Assert\NotBlank]
+    private ?string $type = null;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups("read_class")
-     * @Assert\NotBlank
      */
-    private $damageDice;
+    #[Groups('read_class')]
+    #[Assert\NotBlank]
+    private ?string $damageDice = null;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups("read_class")
-     * @Assert\NotBlank
      */
-    private $damageType;
+    #[Groups('read_class')]
+    #[Assert\NotBlank]
+    private ?string $damageType = null;
 
     /**
      * @ORM\Column(type="float", options={"default": 0})
-     * @Groups("read_class")
-     * @Assert\Type(
-     *     type="float",
-     *     message="La valeur doit être un nombre supérieur ou égal à 0.")
-     * @Assert\PositiveOrZero
      */
-    private $weight;
+    #[Groups('read_class')]
+    #[Assert\Type(type: 'float', message: 'La valeur doit être un nombre supérieur ou égal à 0.')]
+    #[Assert\PositiveOrZero]
+    private ?float $weight = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups("read_class")
      */
-    private $property;
+    #[Groups('read_class')]
+    private ?string $property = null;
 
     /**
      * @ORM\ManyToMany(targetEntity=PlayableClass::class, mappedBy="weapons")
      */
-    private $playableClasses;
+    private \Doctrine\Common\Collections\ArrayCollection|array $playableClasses;
 
     public function __construct()
     {

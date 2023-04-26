@@ -4,10 +4,10 @@ namespace App\Form;
 
 use App\Entity\Ability;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class AbilityType extends AbstractType
 {
@@ -15,25 +15,25 @@ class AbilityType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                "label" => "Nom"
+                'label' => 'Nom',
             ])
             ->add('quickDescription', TextareaType::class, [
-                "label" => "Description rapide de la race"
+                'label' => 'Description rapide de la race',
             ])
             ->add('description', TextareaType::class, [
-                "label" => "Description de la race"
+                'label' => 'Description de la race',
             ])
             ->add('incantationTime', TextareaType::class, [
-                "label" => "Temps d'incantation"
+                'label' => "Temps d'incantation",
             ])
             ->add('abilityRange', TextareaType::class, [
-                "label" => "Portée"
+                'label' => 'Portée',
             ])
             ->add('component', TextareaType::class, [
-                "label" => "Composantes"
+                'label' => 'Composantes',
             ])
             ->add('duration', TextareaType::class, [
-                "label" => "Durée"
+                'label' => 'Durée',
             ])
         ;
     }

@@ -4,21 +4,16 @@ namespace App\Controller\Admin;
 
 use App\Entity\Subclass;
 use App\Form\SubclassType;
-use App\Repository\SubclassRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/admin/sous-classe")
- */
+#[Route(path: '/admin/sous-classe')]
 class SubclassController extends AbstractController
 {
-    /**
-     * @Route("/", name="app_admin_subclass_index", methods={"GET"})
-     */
+    #[Route(path: '/', name: 'app_admin_subclass_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
         $subclasses = $entityManager
@@ -27,13 +22,11 @@ class SubclassController extends AbstractController
 
         return $this->render('admin/subclass/index.html.twig', [
             'subclasses' => $subclasses,
-            'controller' => "SubclassController"
+            'controller' => 'SubclassController',
         ]);
     }
 
-    /**
-     * @Route("/ajouter", name="app_admin_subclass_new", methods={"GET", "POST"})
-     */
+    #[Route(path: '/ajouter', name: 'app_admin_subclass_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $subclass = new Subclass();
@@ -50,24 +43,20 @@ class SubclassController extends AbstractController
         return $this->renderForm('admin/subclass/new.html.twig', [
             'subclass' => $subclass,
             'form' => $form,
-            'controller' => "SubclassController"
+            'controller' => 'SubclassController',
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="app_admin_subclass_show", methods={"GET"})
-     */
+    #[Route(path: '/{id}', name: 'app_admin_subclass_show', methods: ['GET'])]
     public function show(Subclass $subclass): Response
     {
         return $this->render('admin/subclass/show.html.twig', [
             'subclass' => $subclass,
-            'controller' => "SubclassController"
+            'controller' => 'SubclassController',
         ]);
     }
 
-    /**
-     * @Route("/{id}/modifier", name="app_admin_subclass_edit", methods={"GET", "POST"})
-     */
+    #[Route(path: '/{id}/modifier', name: 'app_admin_subclass_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Subclass $subclass, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(SubclassType::class, $subclass);
@@ -82,13 +71,11 @@ class SubclassController extends AbstractController
         return $this->renderForm('admin/subclass/edit.html.twig', [
             'subclass' => $subclass,
             'form' => $form,
-            'controller' => "SubclassController"
+            'controller' => 'SubclassController',
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="app_admin_subclass_delete", methods={"POST"})
-     */
+    #[Route(path: '/{id}', name: 'app_admin_subclass_delete', methods: ['POST'])]
     public function delete(Request $request, Subclass $subclass, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$subclass->getId(), $request->request->get('_token'))) {

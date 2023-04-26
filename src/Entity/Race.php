@@ -16,66 +16,63 @@ class Race
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
-     * @Groups("browse_race")
-     * @Groups("read_race")
-     * @Groups("read_subraces")
      */
+    #[Groups('browse_race')]
+    #[Groups('read_race')]
+    #[Groups('read_subraces')]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("browse_race")
-     * @Groups("read_race")
-     * @Groups("read_subraces")
-     * @Assert\NotBlank
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 255,
-     *      minMessage = "Le nom de la race doit contenir au moins {{ limit }} caractères",
-     *      maxMessage = "Le nom de la race doit contenir au maximum {{ limit }} caractères"
-     * )
      */
-    private $name;
+    #[Groups('browse_race')]
+    #[Groups('read_race')]
+    #[Groups('read_subraces')]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max: 255, minMessage: 'Le nom de la race doit contenir au moins {{ limit }} caractères', maxMessage: 'Le nom de la race doit contenir au maximum {{ limit }} caractères')]
+    private ?string $name = null;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups("read_race")
-     * @Assert\NotBlank
      */
-    private $fullDescription;
+    #[Groups('read_race')]
+    #[Assert\NotBlank]
+    private ?string $fullDescription = null;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups("browse_race")
-     * @Groups("read_race")
-     * @Assert\NotBlank
      */
-    private $quickDescription;
+    #[Groups('browse_race')]
+    #[Groups('read_race')]
+    #[Assert\NotBlank]
+    private ?string $quickDescription = null;
 
     /**
      * @ORM\OneToMany(targetEntity=Subrace::class, mappedBy="race", orphanRemoval=true)
-     * @Groups("read_race")
      */
-    private $subraces;
+    #[Groups('read_race')]
+    private \Doctrine\Common\Collections\ArrayCollection|array $subraces;
 
     /**
-     * The URL to asset folder for this image
+     * The URL to asset folder for this image.
+     *
      * @ORM\Column(type="string", length=255)
      */
-    private $imageUrl;
+    private ?string $imageUrl = null;
 
     /**
-     * The image encode in base64
-     * @Groups("browse_race")
-     * @Groups("read_race")
-     * @var string
+     * The image encode in base64.
      */
-    private $image;
+    #[Groups('browse_race')]
+    #[Groups('read_race')]
+    private ?string $image = null;
 
     /**
-     * The image file
+     * The image file.
      */
     private $imageFile;
 
@@ -168,23 +165,22 @@ class Race
     }
 
     /**
-     * Get the value of image
-     */ 
+     * Get the value of image.
+     */
     public function getImage()
     {
         if ($this->imageUrl !== null) {
             $this->image = base64_encode(file_get_contents($this->imageUrl));
         }
+
         return $this->image;
     }
 
     /**
-     * Set the value of image
+     * Set the value of image.
      *
-     * @param  string  $image
-     *
-     * @return  self
-     */ 
+     * @return self
+     */
     public function setImage(string $image)
     {
         $this->image = $image;
@@ -193,18 +189,18 @@ class Race
     }
 
     /**
-     * Get the value of imageFile
-     */ 
+     * Get the value of imageFile.
+     */
     public function getImageFile()
     {
         return $this->imageFile;
     }
 
     /**
-     * Set the value of imageFile
+     * Set the value of imageFile.
      *
-     * @return  self
-     */ 
+     * @return self
+     */
     public function setImageFile($imageFile)
     {
         $this->imageFile = $imageFile;

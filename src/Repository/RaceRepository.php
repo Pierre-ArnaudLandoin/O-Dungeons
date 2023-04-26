@@ -49,10 +49,11 @@ class RaceRepository extends ServiceEntityRepository
 
     /**
      * @return Race Returns Race object
-    */    
-    public function findRandomTwo(){
+     */
+    public function findRandomTwo()
+    {
         $em = $this->getEntityManager();
-        $query =$em->createQuery('SELECT raceEntity
+        $query = $em->createQuery('SELECT raceEntity
             FROM App\Entity\Race raceEntity
             ORDER BY RAND()
             ')
@@ -69,7 +70,7 @@ class RaceRepository extends ServiceEntityRepository
             ->setMaxResults(5)
             ->getResult()
         ;
-    }   
+    }
 
     // /**
     //  * @return Race[] Returns an array of Race objects

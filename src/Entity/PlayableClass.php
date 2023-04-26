@@ -16,96 +16,92 @@ class PlayableClass
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
-     * @Groups("browse_class")
-     * @Groups("read_class")
      */
+    #[Groups('browse_class')]
+    #[Groups('read_class')]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("browse_class")
-     * @Groups("read_class")
-     * @Assert\NotBlank
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 255,
-     *      minMessage = "Le nom de la sous-classe doit contenir au moins {{ limit }} caractères",
-     *      maxMessage = "Le nom de la sous-classe doit contenir au maximum {{ limit }} caractères"
-     * )
      */
-    private $name;
+    #[Groups('browse_class')]
+    #[Groups('read_class')]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max: 255, minMessage: 'Le nom de la sous-classe doit contenir au moins {{ limit }} caractères', maxMessage: 'Le nom de la sous-classe doit contenir au maximum {{ limit }} caractères')]
+    private ?string $name = null;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups("read_class")
-     * @Assert\NotBlank
      */
-    private $description;
+    #[Groups('read_class')]
+    #[Assert\NotBlank]
+    private ?string $description = null;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups("read_class")
-     * @Assert\NotBlank
-     * @Assert\Length(min=3,minMessage="Il faut au minimum trois caractères")
      */
-    private $lifeDice;
+    #[Groups('read_class')]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 3, minMessage: 'Il faut au minimum trois caractères')]
+    private ?string $lifeDice = null;
 
     /**
-     * The image URL to the folder asset (this is the part send in DB)
+     * The image URL to the folder asset (this is the part send in DB).
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $imageUrl;
+    private ?string $imageUrl = null;
 
     /**
-     * The image encode in base64 (only used in JSON response)
-     * @Groups("browse_class")
-     * @Groups("read_class")
-     *
-     * @var string
+     * The image encode in base64 (only used in JSON response).
      */
-    private $image;
+    #[Groups('browse_class')]
+    #[Groups('read_class')]
+    private ?string $image = null;
 
     /**
-     * The image file (only used in form for uploading)
+     * The image file (only used in form for uploading).
      */
     private $imageFile;
 
     /**
      * @ORM\OneToMany(targetEntity=Subclass::class, mappedBy="playableClass", orphanRemoval=true)
-     * @Groups("read_class")
      */
-    private $subclasses;
+    #[Groups('read_class')]
+    private \Doctrine\Common\Collections\ArrayCollection|array $subclasses;
 
     /**
      * @ORM\ManyToMany(targetEntity=Ability::class, inversedBy="playableClasses")
      */
-    private $abilities;
+    private \Doctrine\Common\Collections\ArrayCollection|array $abilities;
 
     /**
      * @ORM\ManyToMany(targetEntity=Armor::class, inversedBy="playableClasses")
-     * @Groups("read_class")
      */
-    private $armors;
+    #[Groups('read_class')]
+    private \Doctrine\Common\Collections\ArrayCollection|array $armors;
 
     /**
      * @ORM\ManyToMany(targetEntity=Weapon::class, inversedBy="playableClasses")
-     * @Groups("read_class")
      */
-    private $weapons;
+    #[Groups('read_class')]
+    private \Doctrine\Common\Collections\ArrayCollection|array $weapons;
 
     /**
      * @ORM\OneToMany(targetEntity=PlayableClassItem::class, mappedBy="playableClass", orphanRemoval=true, cascade={"persist"})
-     * @Groups("read_class")
      */
-    private $playableClassItems;
+    #[Groups('read_class')]
+    private \Doctrine\Common\Collections\ArrayCollection|array $playableClassItems;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups("browse_class")
      */
-    private $quickDescription;
+    #[Groups('browse_class')]
+    private ?string $quickDescription = null;
 
     public function __construct()
     {
@@ -314,29 +310,30 @@ class PlayableClass
     }
 
     /**
-     * Get the value of image
+     * Get the value of image.
      *
-     * @return  string
-     */ 
+     * @return string
+     */
     public function getImage()
     {
         $this->image = base64_encode(file_get_contents($this->imageUrl));
+
         return $this->image;
     }
 
     /**
-     * Get the
-     */ 
+     * Get the.
+     */
     public function getImageFile()
     {
         return $this->imageFile;
     }
 
     /**
-     * Set the
+     * Set the.
      *
-     * @return  self
-     */ 
+     * @return self
+     */
     public function setImageFile($imageFile)
     {
         $this->imageFile = $imageFile;

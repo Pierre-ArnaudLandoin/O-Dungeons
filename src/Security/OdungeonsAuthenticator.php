@@ -19,18 +19,15 @@ class OdungeonsAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'app_login';
-
-    private UrlGeneratorInterface $urlGenerator;
+    final public const LOGIN_ROUTE = 'app_login';
 
     public function supports(Request $request): bool
     {
         return $request->isMethod('POST') && '/login' === $request->getPathInfo();
     }
 
-    public function __construct(UrlGeneratorInterface $urlGenerator)
+    public function __construct(private readonly UrlGeneratorInterface $urlGenerator)
     {
-        $this->urlGenerator = $urlGenerator;
     }
 
     public function authenticate(Request $request): Passport

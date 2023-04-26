@@ -17,15 +17,15 @@ class SubclassType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Le nom de la sous-classe'
+                'label' => 'Le nom de la sous-classe',
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'La description de la sous-classe'
+                'label' => 'La description de la sous-classe',
             ])
             ->add('playableClass', EntityType::class, [
                 'class' => PlayableClass::class,
                 'choice_label' => 'name',
-                'expanded' => 'true'
+                'expanded' => 'true',
             ])
         ;
     }

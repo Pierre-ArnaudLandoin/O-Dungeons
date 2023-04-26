@@ -3,14 +3,14 @@
 namespace App\DataFixtures;
 
 use App\Entity\Race;
-use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
 
 class RaceFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $dwarf = new Race;
+        $dwarf = new Race();
         $dwarf->setName('Nain');
         $dwarf->setQuickDescription("Des royaumes dont la noblesse n'a d'égale que l'ancienneté, des demeures creusées dans les racines des montagnes, l'écho des pioches et des marteaux s'élevant des mines profondes et des forges flamboyantes, le dévouement envers le clan et la tradition, tels sont les liens qui unissent tous les nains.");
         $dwarf->setFullDescription("Des royaumes dont la noblesse n'a d'égale que l'ancienneté, des demeures creusées dans les racines des montagnes, l'écho des pioches et des marteaux s'élevant des mines profondes et des forges flamboyantes, le dévouement envers le clan et la tradition, tels sont les liens qui unissent tous les nains.
@@ -56,11 +56,11 @@ Résistance naine. Vous êtes avantagé aux jets de sauvegarde contre le poison 
 Langues. Vous parlez, lisez et écrivez le commun et le nain. Le nain est une langue gutturale et percussive, ce qui se retrouve dans l'accent des nains, quel que soit l'idiome parlé.
 
 Variante raciale. Il existe deux variantes raciales principales chez les nains des mondes de D&D : les naïns des collines et les nains des montagnes. Optez pour l'une de ces variantes et ajoutez les traits associés à vos autres traits raciaux.");
-        $dwarf->setImageUrl("asset/nain.png");
+        $dwarf->setImageUrl('asset/nain.png');
 
         $manager->persist($dwarf);
 
-        $elf = new Race;
+        $elf = new Race();
         $elf->setName('Elfe');
         $elf->setQuickDescription("Peuple à la grâce surnaturelle, les elfes vivent en des lieux à la beauté éthérée, au cœur de forêts ancestrales ou dans des tours effilées étincelant d'éclats féeriques, bercés de douces mélodies et où la brise exhale des fragrances exquises. Les elfes qu'on croise hors de leurs domaines sont souvent ménestrels ambulants, artistes ou itinérants. Les nobles humains se disputent les services des professeurs elfes pour enseigner le maniement de l'épée ou la magie à leur progéniture.");
         $elf->setFullDescription("Peuple à la grâce surnaturelle, les elfes vivent en des lieux à la beauté éthérée, au cœur de forêts ancestrales ou dans des tours effilées étincelant d'éclats féeriques, bercés de douces mélodies et où la brise exhale des fragrances exquises. Les elfes qu'on croise hors de leurs domaines sont souvent ménestrels ambulants, artistes ou itinérants. Les nobles humains se disputent les services des professeurs elfes pour enseigner le maniement de l'épée ou la magie à leur progéniture.
@@ -102,11 +102,11 @@ Langues. Vous parlez, lisez et écrivez le commun et l'elfique. Cette langue flu
 De nombreux bardes apprennent cette langue pour pouvoir ajouter des ballades elfiques à leur répertoire.
 
 Variante raciale. Des différends ancestraux entre les elfes ont engendré trois ethnies principales : les hauts-elfes, les elfes sylvestres et les elfes noirs, communément appelés drows.");
-        $elf->setImageUrl("asset/elfe.png");
-        
+        $elf->setImageUrl('asset/elfe.png');
+
         $manager->persist($elf);
 
-        $halfelin = new Race;
+        $halfelin = new Race();
         $halfelin->setName('Halfelin');
         $halfelin->setQuickDescription("Le confort du foyer constitue l'ambition majeure de la plupart des halfelins : de quoi se poser dans la paix et la quiétude, loin des monstres en maraude et du fracas des armées ; un âtre bien alimenté et un repas copieux, une bonne chope et une conversation entre amis. Certains halfelins coulent leurs jours au sein d'une communauté agricole reculée, d'autres forment des troupes nomades qui voyagent à longueur de temps au gré de la route sans fin et des vastes horizons qui promettent de nouvelles contrées merveilleuses, de nouvelles cultures.");
         $halfelin->setFullDescription("Le confort du foyer constitue l'ambition majeure de la plupart des halfelins : de quoi se poser dans la paix et la quiétude, loin des monstres en maraude et du fracas des armées ; un âtre bien alimenté et un repas copieux, une bonne chope et une conversation entre amis. Certains halfelins coulent leurs jours au sein d'une communauté agricole reculée, d'autres forment des troupes nomades qui voyagent à longueur de temps au gré de la route sans fin et des vastes horizons qui promettent de nouvelles contrées merveilleuses, de nouvelles cultures.
@@ -142,11 +142,11 @@ Chanceux. Lorsque vous obtenez un 1 sur le d20 d'un jet d'attaque, un test de ca
 Langues. Vous parlez, lisez et écrivez le commun et le halfelin. Cette langue n'a rien de secret, mais les halfelins n'aiment guère la partager. Leur littérature est plutôt pauvre, car ils écrivent finalement très peu. Leur tradition orale s'avère en revanche très riche. Tous les halfelins ou presque recourent au commun pour converser avec la population des contrées qu'ils habitent ou qu'ils traversent.
 
 Variante raciale. Les deux branches principales de halfelins, les pieds-légers et les robustes tiennent plus de proches cousins que d'ethnies distinctes. Optez pour l'une de ces variantes et ajoutez les traits associés à vos autres traits raciaux.");
-        $halfelin->setImageUrl("asset/halfelin.png");
-        
+        $halfelin->setImageUrl('asset/halfelin.png');
+
         $manager->persist($halfelin);
 
-        $human = new Race;
+        $human = new Race();
         $human->setName('Humain');
         $human->setQuickDescription("Dans la plupart des mondes, les humains sont considérés comme la plus jeune des espèces communes et vivent peu de temps comparés aux nains, aux elfes et aux dragons. C'est peut-être cette longévité modeste qui les pousse à accomplir tant de choses dans le temps qui leur est imparti. À moins qu'ils estiment avoir quelque chose à prouver aux espèces plus anciennes, ce qui expliquerait leurs puissants empires. Quelle que soit leur motivation, les humains restent les novateurs, les battants et les pionniers de ces mondes.");
         $human->setFullDescription("Dans la plupart des mondes, les humains sont considérés comme la plus jeune des espèces communes et vivent peu de temps comparés aux nains, aux elfes et aux dragons. C'est peut-être cette longévité modeste qui les pousse à accomplir tant de choses dans le temps qui leur est imparti. À moins qu'ils estiment avoir quelque chose à prouver aux espèces plus anciennes, ce qui expliquerait leurs puissants empires. Quelle que soit leur motivation, les humains restent les novateurs, les battants et les pionniers de ces mondes.
@@ -166,10 +166,10 @@ Taille. Les humains affichent des mensurations très variées, leur taille allan
 Vitesse. Votre vitesse de base au sol est de 9 m.
 
 Langues. Vous parlez, lisez et écrivez le commun et une langue supplémentaire de votre choix. Les humains apprennent généralement la langue des peuples qu'ils côtoient le plus, qui peut être un dialecte obscur. Ils adorent émailler leur discours de mots empruntés à d'autres langues : jurons orcs, termes musicaux elfiques, formules militaires naïnes, etc.");
-        $human->setImageUrl("asset/humain.png");
+        $human->setImageUrl('asset/humain.png');
 
         $manager->persist($human);
-        
+
         $manager->flush();
     }
 }

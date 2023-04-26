@@ -6,11 +6,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /**
- * Entity normalizer
+ * Entity normalizer.
  */
 class DoctrineDenormalizer implements DenormalizerInterface
 {
-    /** @var EntityManagerInterface **/
+    /** @var EntityManagerInterface * */
     protected $em;
 
     public function __construct(EntityManagerInterface $em)
@@ -19,15 +19,15 @@ class DoctrineDenormalizer implements DenormalizerInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return strpos($type, 'App\\Entity\\') === 0 && (is_numeric($data));
+        return str_starts_with($type, 'App\\Entity\\') && is_numeric($data);
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function denormalize($data, $class, $format = null, array $context = [])
     {

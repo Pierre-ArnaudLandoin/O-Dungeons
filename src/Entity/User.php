@@ -4,79 +4,78 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity("email")
  */
+#[UniqueEntity('email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
-     * @Groups("read_user")
      */
+    #[Groups('read_user')]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\NotBlank
-     * @Assert\Email(
-     *      message= "L'email '{{ value }}' n'est pas un email valide"
-     * )
-     * @Groups("read_user")
      */
-    private $email;
+    #[Assert\NotBlank]
+    #[Assert\Email(message: "L'email '{{ value }}' n'est pas un email valide")]
+    #[Groups('read_user')]
+    private ?string $email = null;
 
     /**
      * @ORM\Column(type="json")
+     *
      * @var string[]
-     * @Assert\NotBlank
-     * @Assert\Choice(choices = {"ROLE_USER", "ROLE_MANAGER", "ROLE_ADMIN", "ROLE_SUPERADMIN"}, multiple = true)
-     * @Groups("read_user")
      */
-    private $roles = [];
+    #[Assert\NotBlank]
+    #[Assert\Choice(choices: ['ROLE_USER', 'ROLE_MANAGER', 'ROLE_ADMIN', 'ROLE_SUPERADMIN'], multiple: true)]
+    #[Groups('read_user')]
+    private array $roles = ['ROLE_USER'];
 
     /**
-     * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Assert\NotBlank
-     * @Assert\Length(min=8, minMessage="Mot de passe inférieur à 8 caractères")
      */
-    private $password;
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 8, minMessage: 'Mot de passe inférieur à 8 caractères')]
+    private ?string $password = null;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
-     * @Groups("read_user")
      */
-    private $lastName;
+    #[Assert\NotBlank]
+    #[Groups('read_user')]
+    private ?string $lastName = null;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
-     * @Groups("read_user")
      */
-    private $firstName;
+    #[Assert\NotBlank]
+    #[Groups('read_user')]
+    private ?string $firstName = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Avatar::class, inversedBy="users")
-     * @Groups("read_user")
      */
-    private $avatar;
+    #[Groups('read_user')]
+    private ?\App\Entity\Avatar $avatar = null;
 
     /**
-    * Constructor
-    */
+     * Constructor.
+     */
     public function __construct()
     {
-        $this->roles = ["ROLE_USER"];
     }
 
     public function getId(): ?int

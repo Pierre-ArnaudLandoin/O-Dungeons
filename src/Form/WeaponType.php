@@ -4,10 +4,10 @@ namespace App\Form;
 
 use App\Entity\Weapon;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class WeaponType extends AbstractType
 {
@@ -15,22 +15,22 @@ class WeaponType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                "label" => "Nom"
+                'label' => 'Nom',
             ])
             ->add('type', TextType::class, [
-                "label" => "Type"
+                'label' => 'Type',
             ])
             ->add('damageDice', TextType::class, [
-                "label" => "Dégâts de dés"
+                'label' => 'Dégâts de dés',
             ])
             ->add('damageType', TextType::class, [
-                "label" => "Type de dégâts"
+                'label' => 'Type de dégâts',
             ])
             ->add('weight', NumberType::class, [
-                "label" => "Poids"
+                'label' => 'Poids',
             ])
             ->add('property', TextType::class, [
-                "label" => "Propriétés"
+                'label' => 'Propriétés',
             ])
         ;
     }

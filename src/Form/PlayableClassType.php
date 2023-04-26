@@ -23,17 +23,17 @@ class PlayableClassType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                "label" => "Nom de la classe"
+                'label' => 'Nom de la classe',
             ])
             ->add('description', TextareaType::class, [
-                "label" => "Description de la classe"
+                'label' => 'Description de la classe',
             ])
             ->add('lifeDice', TextType::class, [
-                "label" => "Le dès de vie de la classe"
+                'label' => 'Le dès de vie de la classe',
             ])
             // Generates a file field, in our form, to upload a new PNG image
             ->add('imageFile', FileType::class, [
-                "label" => "L'image de la classe",
+                'label' => "L'image de la classe",
                 // This is managing the contraints about the uploaded file
                 'constraints' => [
                     new File([
@@ -41,37 +41,37 @@ class PlayableClassType extends AbstractType
                         'mimeTypes' => [
                             'image/png',
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid PNG image', 
-                    ])
-                ], 
+                        'mimeTypesMessage' => 'Please upload a valid PNG image',
+                    ]),
+                ],
             ])
             ->add('quickDescription', TextareaType::class, [
-                "label" => "Description rapide de la classe"
+                'label' => 'Description rapide de la classe',
             ])
             ->add('abilities', EntityType::class, [
                 'label' => 'Pouvoirs reliés à la classe',
                 'class' => Ability::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-                'expanded' => true
+                'expanded' => true,
             ])
             ->add('armors', EntityType::class, [
                 'label' => 'Armures données par la classe',
                 'class' => Armor::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-                'expanded' => true
+                'expanded' => true,
             ])
             ->add('weapons', EntityType::class, [
                 'class' => Weapon::class,
-                'label' => "Armes données par la classe",
+                'label' => 'Armes données par la classe',
                 'choice_label' => 'name',
                 'multiple' => true,
-                'expanded' => true
+                'expanded' => true,
             ])
             // Allows us to render multiple forms. We use it to handle the relation between PlayableClass and Item through the entity PlayableClassItem
             ->add('playableClassItems', CollectionType::class, [
-                // The type of form we want to render. Each form represents a relation 
+                // The type of form we want to render. Each form represents a relation
                 'entry_type' => PlayableClassItemType::class,
                 'label' => false,
                 // Allows us to add a new form
@@ -81,7 +81,7 @@ class PlayableClassType extends AbstractType
                 // At the creation of a relation, this allows us to use the method PlayableClass::addPlayableClassItem instead of PlayableClassItemRepository::add
                 // Because of this, each new relation is related to this PlayableClass
                 // Same way for delete
-                'by_reference' => false
+                'by_reference' => false,
             ])
         ;
     }

@@ -14,8 +14,8 @@ class SubraceFixtures extends Fixture implements DependentFixtureInterface
     {
         $raceRepo = $manager->getRepository(Race::class);
 
-        $hillDwarf = new Subrace;
-        $hillDwarf->setRace($raceRepo->findOneBy(["name" => "Nain"]));
+        $hillDwarf = new Subrace();
+        $hillDwarf->setRace($raceRepo->findOneBy(['name' => 'Nain']));
         $hillDwarf->setName('Nain des collines');
         $hillDwarf->setDescription("Nain des collines, vous êtes doté de sens aiguisés, d'une grande sagacité et d'une robustesse remarquable. Les nains d'or des Forgotten Realms sont des nains des collines.");
         $hillDwarf->setImageUrl('');
@@ -49,8 +49,8 @@ Ténacité naine. Votre maximum de points de vie augmente de 1, et augmente enco
 
         $manager->persist($hillDwarf);
 
-        $mountainDwarf = new Subrace;
-        $mountainDwarf->setRace($raceRepo->findOneBy(["name" => "Nain"]));
+        $mountainDwarf = new Subrace();
+        $mountainDwarf->setRace($raceRepo->findOneBy(['name' => 'Nain']));
         $mountainDwarf->setName('Nain des montagnes');
         $mountainDwarf->setDescription("Comme tous les nains des montagnes, vous êtes fort et coriace, habitué à l'existence rude que réservent les reliefs escarpés. Vous êtes plutôt grand pour un nain et votre peau affiche un teint assez clair. Les nains d'écu du nord des Forgotten Realms sont des nains des montagnes.");
         $mountainDwarf->setImageUrl('');
@@ -84,8 +84,8 @@ Port des armures naines. Vous avez la maîtrise des armures légères et interm�
 
         $manager->persist($mountainDwarf);
 
-        $highElf = new Subrace;
-        $highElf->setRace($raceRepo->findOneBy(["name" => "Elfe"]));
+        $highElf = new Subrace();
+        $highElf->setRace($raceRepo->findOneBy(['name' => 'Elfe']));
         $highElf->setName('Haut-elfe');
         $highElf->setDescription("Les hauts-elfes, très vifs d'esprit, connaissent chacun les rudiments de la magie. Au sein de nombreux univers de D&D, on rencontre deux types de hauts-elfes. Ceux qui se montrent hautains et distants, et s'estiment supérieurs à tous, y compris les autres cultures elfiques. C'est le cas des elfes du soleil des Forgotten Realms. L'autre type de hauts-elfes se montre plus cordial, fait preuve de moins de morgue et se rencontre souvent parmi les humains et d'autres races. C'est le cas des elfes de lune des Forgotten Realms.
         
@@ -129,8 +129,8 @@ Langue supplémentaire. Vous parlez, lisez et écrivez une langue supplémentair
 
         $manager->persist($highElf);
 
-        $woodElf = new Subrace;
-        $woodElf->setRace($raceRepo->findOneBy(["name" => "Elfe"]));
+        $woodElf = new Subrace();
+        $woodElf->setRace($raceRepo->findOneBy(['name' => 'Elfe']));
         $woodElf->setName('Elfe sylvestre');
         $woodElf->setDescription("Les elfes sylvestres jouissent d'une grande intuition et de sens plus acérés. Leur preste foulée leur permet de parcourir furtivement leurs forêts natales. Dans les Forgotten Realms, les elfes sylvestres (que l'on appelle également elfes sauvages, elfes verts ou elfes desbois) vivent en réclusion et se méfient des espèces non elfiques.
         La peau d'un elfe sylvestre affiche souvent une teinte cuivrée, parfois avec des reflets verts. Leurs cheveux sont souvent bruns ou noirs, mais on croise parfois des individus blonds, ou blond cuivré. Ils ont les yeux verts, marron ou noisette.
@@ -168,8 +168,8 @@ Cachette naturelle. Vous pouvez tenter de vous cacher lorsque la visibilité est
 
         $manager->persist($woodElf);
 
-        $lightfoot = new Subrace;
-        $lightfoot->setRace($raceRepo->findOneBy(["name" => "Halfelin"]));
+        $lightfoot = new Subrace();
+        $lightfoot->setRace($raceRepo->findOneBy(['name' => 'Halfelin']));
         $lightfoot->setName('Pied-léger');
         $lightfoot->setDescription("Comme tout halfelin pied-léger, vous maîtrisez l'art de vous soustraire à l'attention d'autrui et n'hésitez pas à vous cacher derrière plus grand que vous pour ce faire. Vous êtes plutôt affable. Dans les Forgotten Realms, les halfelins pieds-légers sont les plus répandus et constituent la culture halfeline la plus courante.");
         $lightfoot->setImageUrl('');
@@ -197,10 +197,10 @@ Discrétion naturelle. Il vous suffit d'être derrière une créature dont la ca
 
         $manager->persist($lightfoot);
 
-        $stout = new Subrace;
-        $stout->setRace($raceRepo->findOneBy(["name" => "Halfelin"]));
+        $stout = new Subrace();
+        $stout->setRace($raceRepo->findOneBy(['name' => 'Halfelin']));
         $stout->setName('Robuste');
-        $stout->setDescription("Les halfelins robustes sont plus vigoureux et plus résistants au poison. Dans les Forgotten Realms, ces halfelins appelés « cœurs-vaillants » se rencontrent surtout dans le sud.");
+        $stout->setDescription('Les halfelins robustes sont plus vigoureux et plus résistants au poison. Dans les Forgotten Realms, ces halfelins appelés « cœurs-vaillants » se rencontrent surtout dans le sud.');
         $stout->setImageUrl('');
         $stout->setStrength(0);
         $stout->setDexterity(2);
@@ -226,8 +226,8 @@ Résilience des robustes. Vous êtes avantagé aux jets de sauvegarde contre le 
 
         $manager->persist($stout);
 
-        $human = new Subrace;
-        $human->setRace($raceRepo->findOneBy(["name" => "Humain"]));
+        $human = new Subrace();
+        $human->setRace($raceRepo->findOneBy(['name' => 'Humain']));
         $human->setName('Humain');
         $human->setDescription("Dans la plupart des mondes, les humains sont considérés comme la plus jeune des espèces communes et vivent peu de temps comparés aux nains, aux elfes et aux dragons. C'est peut-être cette longévité modeste qui les pousse à accomplir tant de choses dans le temps qui leur est imparti. À moins qu'ils estiment avoir quelque chose à prouver aux espèces plus anciennes, ce qui expliquerait leurs puissants empires. Quelle que soit leur motivation, les humains restent les novateurs, les battants et les pionniers de ces mondes.");
         $human->setImageUrl('');
@@ -250,8 +250,7 @@ Langues. Vous parlez, lisez et écrivez le commun et une langue supplémentaire 
         $manager->persist($human);
 
         $manager->flush();
-    } 
-
+    }
 
     public function getDependencies()
     {

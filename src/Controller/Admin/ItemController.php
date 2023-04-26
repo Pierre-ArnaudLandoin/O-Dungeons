@@ -4,21 +4,16 @@ namespace App\Controller\Admin;
 
 use App\Entity\Item;
 use App\Form\ItemType;
-use App\Repository\ItemRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/admin/objet")
- */
+#[Route(path: '/admin/objet')]
 class ItemController extends AbstractController
 {
-    /**
-     * @Route("/", name="app_admin_item_index", methods={"GET"})
-     */
+    #[Route(path: '/', name: 'app_admin_item_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
         $items = $entityManager
@@ -27,13 +22,11 @@ class ItemController extends AbstractController
 
         return $this->render('admin/item/index.html.twig', [
             'items' => $items,
-            'controller' => 'ItemController'
+            'controller' => 'ItemController',
         ]);
     }
 
-    /**
-     * @Route("/ajouter", name="app_admin_item_new", methods={"GET", "POST"})
-     */
+    #[Route(path: '/ajouter', name: 'app_admin_item_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $item = new Item();
@@ -50,24 +43,20 @@ class ItemController extends AbstractController
         return $this->renderForm('admin/item/new.html.twig', [
             'item' => $item,
             'form' => $form,
-            'controller' => 'ItemController'
+            'controller' => 'ItemController',
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="app_admin_item_show", methods={"GET"})
-     */
+    #[Route(path: '/{id}', name: 'app_admin_item_show', methods: ['GET'])]
     public function show(Item $item): Response
     {
         return $this->render('admin/item/show.html.twig', [
             'item' => $item,
-            'controller' => 'ItemController'
+            'controller' => 'ItemController',
         ]);
     }
 
-    /**
-     * @Route("/{id}/modifier", name="app_admin_item_edit", methods={"GET", "POST"})
-     */
+    #[Route(path: '/{id}/modifier', name: 'app_admin_item_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Item $item, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ItemType::class, $item);
@@ -82,13 +71,11 @@ class ItemController extends AbstractController
         return $this->renderForm('admin/item/edit.html.twig', [
             'item' => $item,
             'form' => $form,
-            'controller' => 'ItemController'
+            'controller' => 'ItemController',
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="app_admin_item_delete", methods={"POST"})
-     */
+    #[Route(path: '/{id}', name: 'app_admin_item_delete', methods: ['POST'])]
     public function delete(Request $request, Item $item, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$item->getId(), $request->request->get('_token'))) {

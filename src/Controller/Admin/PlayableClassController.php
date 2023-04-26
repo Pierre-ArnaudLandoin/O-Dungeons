@@ -4,23 +4,17 @@ namespace App\Controller\Admin;
 
 use App\Entity\PlayableClass;
 use App\Form\PlayableClassType;
-use App\Repository\PlayableClassRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
-use App\Entity\Race;
 
-/**
- * @Route("/admin/classe")
- */
+#[Route(path: '/admin/classe')]
 class PlayableClassController extends AbstractController
 {
-    /**
-     * @Route("/", name="app_admin_playable_class_index", methods={"GET"})
-     */
+    #[Route(path: '/', name: 'app_admin_playable_class_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
         $playableClasses = $entityManager
@@ -29,13 +23,11 @@ class PlayableClassController extends AbstractController
 
         return $this->render('admin/playable_class/index.html.twig', [
             'playable_classes' => $playableClasses,
-            'controller' => 'PlayableClassController'
+            'controller' => 'PlayableClassController',
         ]);
     }
 
-    /**
-     * @Route("/ajouter", name="app_admin_playable_class_new", methods={"GET", "POST"})
-     */
+    #[Route(path: '/ajouter', name: 'app_admin_playable_class_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $playableClass = new PlayableClass();
@@ -48,13 +40,11 @@ class PlayableClassController extends AbstractController
                     'error',
                     'Veuillez téléverser une image'
                 );
-            }
-            else {
-                $fileName = $slugger->slug($playableClass->getName())->lower().".png";
+            } else {
+                $fileName = $slugger->slug($playableClass->getName())->lower().'.png';
                 $file = $form['imageFile']->getData();
                 $file->move('asset', $fileName);
                 $playableClass->setImageUrl('asset/'.$fileName);
-
 
                 $entityManager->persist($playableClass);
                 $entityManager->flush();
@@ -66,24 +56,20 @@ class PlayableClassController extends AbstractController
         return $this->renderForm('admin/playable_class/new.html.twig', [
             'playable_class' => $playableClass,
             'form' => $form,
-            'controller' => 'PlayableClassController'
+            'controller' => 'PlayableClassController',
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="app_admin_playable_class_show", methods={"GET"})
-     */
+    #[Route(path: '/{id}', name: 'app_admin_playable_class_show', methods: ['GET'])]
     public function show(PlayableClass $playableClass): Response
     {
         return $this->render('admin/playable_class/show.html.twig', [
             'playable_class' => $playableClass,
-            'controller' => 'PlayableClassController'
+            'controller' => 'PlayableClassController',
         ]);
     }
 
-    /**
-     * @Route("/{id}/modifier", name="app_admin_playable_class_edit", methods={"GET", "POST"})
-     */
+    #[Route(path: '/{id}/modifier', name: 'app_admin_playable_class_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, PlayableClass $playableClass, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(PlayableClassType::class, $playableClass);
@@ -91,10 +77,10 @@ class PlayableClassController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form['imageFile']->getData() !== null) {
-                $fileName = $slugger->slug($playableClass->getName())->lower().".png";
+                $fileName = $slugger->slug($playableClass->getName())->lower().'.png';
                 $file = $form['imageFile']->getData();
                 $file->move('asset', $fileName);
-            
+
                 $playableClass->setImageUrl('asset/'.$fileName);
             }
             $entityManager->flush();
@@ -105,20 +91,18 @@ class PlayableClassController extends AbstractController
         return $this->renderForm('admin/playable_class/edit.html.twig', [
             'playable_class' => $playableClass,
             'form' => $form,
-            'controller' => 'PlayableClassController'
+            'controller' => 'PlayableClassController',
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="app_admin_playable_class_delete", methods={"POST"})
-     */
+    #[Route(path: '/{id}', name: 'app_admin_playable_class_delete', methods: ['POST'])]
     public function delete(Request $request, PlayableClass $playableClass, EntityManagerInterface $entityManager): Response
     {
         $imageFile = $playableClass->getImageUrl();
         if (file_exists($imageFile)) {
             unlink($imageFile);
         }
-        
+
         if ($this->isCsrfTokenValid('delete'.$playableClass->getId(), $request->request->get('_token'))) {
             $entityManager->remove($playableClass);
             $entityManager->flush();

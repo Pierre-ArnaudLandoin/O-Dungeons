@@ -6,12 +6,10 @@ use App\Entity\User;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class AuthenticationSuccessListener 
+class AuthenticationSuccessListener
 {
-
     /**
-     * Sends user datas with JWT
-     * @param AuthenticationSuccessEvent $event
+     * Sends user datas with JWT.
      */
     public function onAuthenticationSuccessResponse(AuthenticationSuccessEvent $event)
     {
@@ -33,8 +31,8 @@ class AuthenticationSuccessListener
             'avatar' => $user->getAvatar() !== null ? [
                 'id' => $user->getAvatar()->getId(),
                 'name' => $user->getAvatar()->getName(),
-                'image_url' => $user->getAvatar()->getImageUrl()
-            ]: null
+                'image_url' => $user->getAvatar()->getImageUrl(),
+            ] : null,
         ];
 
         $event->setData($data);

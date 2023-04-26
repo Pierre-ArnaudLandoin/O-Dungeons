@@ -16,54 +16,56 @@ class Background
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
-     * @Groups("browse_backgrounds")
-     * @Groups("read_backgrounds")
      */
+    #[Groups('browse_backgrounds')]
+    #[Groups('read_backgrounds')]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("browse_backgrounds")
-     * @Groups("read_backgrounds")
-     * @Assert\NotBlank
      */
-    private $name;
+    #[Groups('browse_backgrounds')]
+    #[Groups('read_backgrounds')]
+    #[Assert\NotBlank]
+    private ?string $name = null;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups("read_backgrounds")
-     * @Assert\NotBlank
      */
-    private $capacities;
+    #[Groups('read_backgrounds')]
+    #[Assert\NotBlank]
+    private ?string $capacities = null;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups("read_backgrounds")
-     * @Assert\NotBlank
      */
-    private $description;
+    #[Groups('read_backgrounds')]
+    #[Assert\NotBlank]
+    private ?string $description = null;
 
     /**
      * @ORM\Column(type="integer", options={"default": 0})
-     * @Groups("read_backgrounds")
-     * @Assert\PositiveOrZero
      */
-    private $nbLanguage;
+    #[Groups('read_backgrounds')]
+    #[Assert\PositiveOrZero]
+    private ?int $nbLanguage = null;
 
     /**
      * @ORM\ManyToMany(targetEntity=Item::class, inversedBy="backgrounds")
-     * @Groups("read_backgrounds")
      */
-    private $items;
+    #[Groups('read_backgrounds')]
+    private \Doctrine\Common\Collections\ArrayCollection|array $items;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups("read_backgrounds")
-     * @Assert\PositiveOrZero
      */
-    private $nbGolds;
+    #[Groups('read_backgrounds')]
+    #[Assert\PositiveOrZero]
+    private ?int $nbGolds = null;
 
     public function __construct()
     {

@@ -14,37 +14,35 @@ class Subclass
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
-     * @Groups("read_class")
      */
+    #[Groups('read_class')]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("read_class")
-     * @Assert\NotBlank
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 255,
-     *      minMessage = "Le nom de la sous-classe doit contenir au moins {{ limit }} caractères",
-     *      maxMessage = "Le nom de la sous-classe doit contenir au maximum {{ limit }} caractères"
-     * )
      */
-    private $name;
+    #[Groups('read_class')]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max: 255, minMessage: 'Le nom de la sous-classe doit contenir au moins {{ limit }} caractères', maxMessage: 'Le nom de la sous-classe doit contenir au maximum {{ limit }} caractères')]
+    private ?string $name = null;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups("read_class")
-     * @Assert\NotBlank
      */
-    private $description;
+    #[Groups('read_class')]
+    #[Assert\NotBlank]
+    private ?string $description = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=PlayableClass::class, inversedBy="subclasses")
+     *
      * @ORM\JoinColumn(nullable=false)
      */
-    private $playableClass;
+    private ?\App\Entity\PlayableClass $playableClass = null;
 
     public function getId(): ?int
     {

@@ -11,40 +11,30 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/admin/avatars", name="app_admin_avatars_")
- */
+#[Route(path: '/admin/avatars', name: 'app_admin_avatars_')]
 class AvatarController extends AbstractController
 {
-    /**
-     * @Route("/", name="browser", methods={"GET"})
-     *
-     * @return Response
-     */
+    #[Route(path: '/', name: 'browser', methods: ['GET'])]
     public function browse(AvatarRepository $avatarRepo): Response
     {
         $avatars = $avatarRepo->findAll();
 
         return $this->render('admin/avatar/index.html.twig', [
             'controller' => 'AvatarController',
-            'avatars' => $avatars
+            'avatars' => $avatars,
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="read", methods={"GET"}, requirements={"id": "\d+"})
-     */
+    #[Route(path: '/{id}', name: 'read', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function read(Avatar $avatar): Response
     {
         return $this->render('admin/avatar/read.html.twig', [
             'controller' => 'AvatarController',
-            'avatar' => $avatar
+            'avatar' => $avatar,
         ]);
     }
 
-    /**
-     * @Route("/{id}/modifier", name="edit", methods={"GET", "POST"}, requirements={"id": "\d+"})
-     */
+    #[Route(path: '/{id}/modifier', name: 'edit', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
     public function edit(Avatar $avatar, Request $request, EntityManagerInterface $manager): Response
     {
         $form = $this->createForm(AvatarType::class, $avatar);
@@ -60,16 +50,14 @@ class AvatarController extends AbstractController
             'controller' => 'AvatarController',
             'title' => 'Modifier',
             'avatar' => $avatar,
-            'form' => $form
+            'form' => $form,
         ]);
     }
 
-    /**
-     * @Route("/ajouter", name="add", methods={"GET", "POST"})
-     */
+    #[Route(path: '/ajouter', name: 'add', methods: ['GET', 'POST'])]
     public function add(Request $request, EntityManagerInterface $manager): Response
     {
-        $avatar = new Avatar;
+        $avatar = new Avatar();
 
         $form = $this->createForm(AvatarType::class, $avatar);
         $form->handleRequest($request);
@@ -85,23 +73,21 @@ class AvatarController extends AbstractController
             'controller' => 'AvatarController',
             'title' => 'Ajouter',
             'avatar' => $avatar,
-            'form' => $form
+            'form' => $form,
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="delete", methods={"POST"}, requirements={"id": "\d+"})
-     */
+    #[Route(path: '/{id}', name: 'delete', methods: ['POST'], requirements: ['id' => '\d+'])]
     public function delete(Request $request, Avatar $avatar, EntityManagerInterface $manager): Response
     {
         // This is the third way to prevent users who are not granted to access this method/route
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        if($this->isCsrfTokenValid('delete'.$avatar->getId(), $request->request->get('_token'))){
+        if ($this->isCsrfTokenValid('delete'.$avatar->getId(), $request->request->get('_token'))) {
             $manager->remove($avatar);
             $manager->flush();
         }
-        
+
         return $this->redirectToRoute('app_admin_avatars_browser');
     }
 }

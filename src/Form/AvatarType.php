@@ -16,14 +16,14 @@ class AvatarType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                "label" => "Le nom de l'avatar"
+                'label' => "Le nom de l'avatar",
             ])
             ->add('imageUrl', UrlType::class, [
-                "label" => "Le lien de l'image qui servira d'avatar"
+                'label' => "Le lien de l'image qui servira d'avatar",
             ])
             ->add('save', SubmitType::class, [
-                "label" => "Sauvegarder cet avatar",
-                "attr" => ["class" => "btn-success"]
+                'label' => 'Sauvegarder cet avatar',
+                'attr' => ['class' => 'btn-success'],
             ])
         ;
     }

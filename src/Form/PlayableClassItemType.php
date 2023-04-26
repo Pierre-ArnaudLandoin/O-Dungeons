@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Item;
-use App\Entity\PlayableClass;
 use App\Entity\PlayableClassItem;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -17,12 +16,12 @@ class PlayableClassItemType extends AbstractType
     {
         $builder
             ->add('quantity', IntegerType::class, [
-                'label' => 'Nombre d\'objet'
+                'label' => 'Nombre d\'objet',
             ])
             ->add('item', EntityType::class, [
                 'class' => Item::class,
                 'label' => 'L\'objet',
-                'choice_label' => 'name'
+                'choice_label' => 'name',
             ])
         ;
     }

@@ -18,18 +18,18 @@ class RaceType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                "label" => "Le nom de la race",
-                "attr" => ["placeholder" => "Elfe"]
+                'label' => 'Le nom de la race',
+                'attr' => ['placeholder' => 'Elfe'],
             ])
             ->add('fullDescription', TextareaType::class, [
-                "label" => "La description complète de la race"
+                'label' => 'La description complète de la race',
             ])
             ->add('quickDescription', TextareaType::class, [
-                "label" => "La description rapide de la race"
+                'label' => 'La description rapide de la race',
             ])
             // Same explanation as the PlayableClassType
             ->add('imageFile', FileType::class, [
-                "label" => "L'image de la race",
+                'label' => "L'image de la race",
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
@@ -37,12 +37,12 @@ class RaceType extends AbstractType
                             'image/png',
                         ],
                         'mimeTypesMessage' => 'Please upload a valid PNG image',
-                    ])
-                ]
+                    ]),
+                ],
             ])
             ->add('save', SubmitType::class, [
-                "label" => "Sauvegarder cette race",
-                "attr" => ["class" => "btn-success"]
+                'label' => 'Sauvegarder cette race',
+                'attr' => ['class' => 'btn-success'],
             ])
         ;
     }

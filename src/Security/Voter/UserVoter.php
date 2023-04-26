@@ -9,8 +9,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserVoter extends Voter
 {
-    public const EDIT = 'PROFIL_EDIT';
-    public const VIEW = 'PROFIL_VIEW';
+    final public const EDIT = 'PROFIL_EDIT';
+    final public const VIEW = 'PROFIL_VIEW';
 
     protected function supports(string $attribute, $subject): bool
     {
@@ -30,7 +30,7 @@ class UserVoter extends Voter
         if (!$user instanceof UserInterface) {
             return false;
         }
-        
+
         // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {
             case self::EDIT:

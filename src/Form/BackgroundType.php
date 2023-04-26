@@ -18,25 +18,25 @@ class BackgroundType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Le nom de l\'historique'
+                'label' => 'Le nom de l\'historique',
             ])
             ->add('capacities', TextType::class, [
-                'label' => 'Les capacités de l\'historique'
+                'label' => 'Les capacités de l\'historique',
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'La description de l\'historique'
+                'label' => 'La description de l\'historique',
             ])
             ->add('nbLanguage', IntegerType::class, [
-                'label' => 'Le nombre de language que l\'historique permet d\'apprendre'
+                'label' => 'Le nombre de language que l\'historique permet d\'apprendre',
             ])
             ->add('nbGolds', IntegerType::class, [
-                'label' => 'Le nombre de pièce d\'or de départ'
+                'label' => 'Le nombre de pièce d\'or de départ',
             ])
             ->add('items', EntityType::class, [
                 'class' => Item::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-                'expanded' => true
+                'expanded' => true,
             ])
         ;
     }

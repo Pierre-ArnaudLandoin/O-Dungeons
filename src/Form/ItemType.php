@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Item;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -16,10 +15,10 @@ class ItemType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Le nom de l\'objet'
+                'label' => 'Le nom de l\'objet',
             ])
             ->add('weight', NumberType::class, [
-                'label' => 'Poids de l\'objet'
+                'label' => 'Poids de l\'objet',
             ])
         ;
     }

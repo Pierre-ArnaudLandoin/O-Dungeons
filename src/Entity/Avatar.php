@@ -16,34 +16,36 @@ class Avatar
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
-     * @Groups("browse_avatars")
-     * @Groups("read_user")
      */
+    #[Groups('browse_avatars')]
+    #[Groups('read_user')]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("browse_avatars")
-     * @Groups("read_user")
-     * @Assert\NotBlank
      */
-    private $name;
+    #[Groups('browse_avatars')]
+    #[Groups('read_user')]
+    #[Assert\NotBlank]
+    private ?string $name = null;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("browse_avatars")
-     * @Groups("read_user")
-     * @Assert\Url
-     * @Assert\NotBlank
      */
-    private $imageUrl;
+    #[Groups('browse_avatars')]
+    #[Groups('read_user')]
+    #[Assert\Url]
+    #[Assert\NotBlank]
+    private ?string $imageUrl = null;
 
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="avatar")
      */
-    private $users;
+    private \Doctrine\Common\Collections\ArrayCollection|array $users;
 
     public function __construct()
     {

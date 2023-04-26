@@ -14,31 +14,35 @@ class PlayableClassItem
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups("read_class")
-     * @Assert\NotBlank
-     * @Assert\PositiveOrZero
      */
-    private $quantity;
+    #[Groups('read_class')]
+    #[Assert\NotBlank]
+    #[Assert\PositiveOrZero]
+    private ?int $quantity = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=PlayableClass::class, inversedBy="playableClassItems")
+     *
      * @ORM\JoinColumn(nullable=false)
      */
-    private $playableClass;
+    private ?\App\Entity\PlayableClass $playableClass = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Item::class, inversedBy="playableClassItems")
+     *
      * @ORM\JoinColumn(nullable=false)
-     * @Groups("read_class")
      */
-    private $item;
+    #[Groups('read_class')]
+    private ?\App\Entity\Item $item = null;
 
     public function getId(): ?int
     {

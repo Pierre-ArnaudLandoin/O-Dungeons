@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 /**
  * @ORM\Entity(repositoryClass=AbilityRepository::class)
  */
@@ -17,66 +16,68 @@ class Ability
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
-     * @Groups("browse_abilities")
-     * @Groups("read_abilities")
      */
+    #[Groups('browse_abilities')]
+    #[Groups('read_abilities')]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("browse_abilities")
-     * @Groups("read_abilities")
-     * @Assert\NotBlank
-     * @Assert\Length(max=255, maxMessage="Nombre de caractères autorisés dépassés ({{ value }}), maximum 255")
      */
-    private $name;
+    #[Groups('browse_abilities')]
+    #[Groups('read_abilities')]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255, maxMessage: 'Nombre de caractères autorisés dépassés ({{ value }}), maximum 255')]
+    private ?string $name = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups("read_abilities")
      */
-    private $quickDescription;
+    #[Groups('read_abilities')]
+    private ?string $quickDescription = null;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups("read_abilities")
      */
-    private $description;
+    #[Groups('read_abilities')]
+    private ?string $description = null;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("read_abilities")
-     * @Assert\NotBlank
      */
-    private $incantationTime;
+    #[Groups('read_abilities')]
+    #[Assert\NotBlank]
+    private ?string $incantationTime = null;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("read_abilities")
-     * @Assert\NotBlank
      */
-    private $abilityRange;
+    #[Groups('read_abilities')]
+    #[Assert\NotBlank]
+    private ?string $abilityRange = null;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("read_abilities")
-     * @Assert\NotBlank
      */
-    private $component;
+    #[Groups('read_abilities')]
+    #[Assert\NotBlank]
+    private ?string $component = null;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("read_abilities")
-     * @Assert\NotBlank
      */
-    private $duration;
+    #[Groups('read_abilities')]
+    #[Assert\NotBlank]
+    private ?string $duration = null;
 
     /**
      * @ORM\ManyToMany(targetEntity=PlayableClass::class, mappedBy="abilities")
      */
-    private $playableClasses;
+    private \Doctrine\Common\Collections\ArrayCollection|array $playableClasses;
 
     public function __construct()
     {

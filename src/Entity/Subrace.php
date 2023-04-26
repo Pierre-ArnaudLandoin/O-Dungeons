@@ -14,114 +14,112 @@ class Subrace
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
-     * @Groups("read_race")
-     * @Groups("browse_subraces")
-     * @Groups("read_subraces")
      */
+    #[Groups('read_race')]
+    #[Groups('browse_subraces')]
+    #[Groups('read_subraces')]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("read_race")
-     * @Groups("browse_subraces")
-     * @Groups("read_subraces")
-     * @Assert\NotBlank
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 255,
-     *      minMessage = "Le nom de la sous-race doit contenir au moins {{ limit }} caractères",
-     *      maxMessage = "Le nom de la sous-race doit contenir au maximum {{ limit }} caractères"
-     * )
      */
-    private $name;
+    #[Groups('read_race')]
+    #[Groups('browse_subraces')]
+    #[Groups('read_subraces')]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max: 255, minMessage: 'Le nom de la sous-race doit contenir au moins {{ limit }} caractères', maxMessage: 'Le nom de la sous-race doit contenir au maximum {{ limit }} caractères')]
+    private ?string $name = null;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups("read_race")
-     * @Groups("read_subraces")
-     * @Assert\NotBlank
      */
-    private $description;
+    #[Groups('read_race')]
+    #[Groups('read_subraces')]
+    #[Assert\NotBlank]
+    private ?string $description = null;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("read_race")
-     * @Groups("read_subraces")
-     * @Assert\Url
-     * @Assert\NotBlank
      */
-    private $imageUrl;
+    #[Groups('read_race')]
+    #[Groups('read_subraces')]
+    #[Assert\Url]
+    #[Assert\NotBlank]
+    private ?string $imageUrl = null;
 
     /**
      * @ORM\Column(type="integer", options={"default": 0})
-     * @Groups("read_race")
-     * @Groups("read_subraces")
-     * @Assert\NotBlank
-     * @Assert\PositiveOrZero
      */
-    private $strength;
+    #[Groups('read_race')]
+    #[Groups('read_subraces')]
+    #[Assert\NotBlank]
+    #[Assert\PositiveOrZero]
+    private ?int $strength = null;
 
     /**
      * @ORM\Column(type="integer", options={"default": 0})
-     * @Groups("read_race")
-     * @Groups("read_subraces")
-     * @Assert\NotBlank
-     * @Assert\PositiveOrZero
      */
-    private $dexterity;
+    #[Groups('read_race')]
+    #[Groups('read_subraces')]
+    #[Assert\NotBlank]
+    #[Assert\PositiveOrZero]
+    private ?int $dexterity = null;
 
     /**
      * @ORM\Column(type="integer", options={"default": 0})
-     * @Groups("read_race")
-     * @Groups("read_subraces")
-     * @Assert\NotBlank
-     * @Assert\PositiveOrZero
      */
-    private $constitution;
+    #[Groups('read_race')]
+    #[Groups('read_subraces')]
+    #[Assert\NotBlank]
+    #[Assert\PositiveOrZero]
+    private ?int $constitution = null;
 
     /**
      * @ORM\Column(type="integer", options={"default": 0})
-     * @Groups("read_race")
-     * @Groups("read_subraces")
-     * @Assert\NotBlank
-     * @Assert\PositiveOrZero
      */
-    private $wisdom;
+    #[Groups('read_race')]
+    #[Groups('read_subraces')]
+    #[Assert\NotBlank]
+    #[Assert\PositiveOrZero]
+    private ?int $wisdom = null;
 
     /**
      * @ORM\Column(type="integer", options={"default": 0})
-     * @Groups("read_race")
-     * @Groups("read_subraces")
-     * @Assert\NotBlank
-     * @Assert\PositiveOrZero
      */
-    private $intelligence;
+    #[Groups('read_race')]
+    #[Groups('read_subraces')]
+    #[Assert\NotBlank]
+    #[Assert\PositiveOrZero]
+    private ?int $intelligence = null;
 
     /**
      * @ORM\Column(type="integer", options={"default": 0})
-     * @Groups("read_race")
-     * @Groups("read_subraces")
-     * @Assert\NotBlank
-     * @Assert\PositiveOrZero
      */
-    private $charisma;
+    #[Groups('read_race')]
+    #[Groups('read_subraces')]
+    #[Assert\NotBlank]
+    #[Assert\PositiveOrZero]
+    private ?int $charisma = null;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups("read_race")
-     * @Groups("read_subraces")
-     * @Assert\NotBlank
      */
-    private $trait;
+    #[Groups('read_race')]
+    #[Groups('read_subraces')]
+    #[Assert\NotBlank]
+    private ?string $trait = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Race::class, inversedBy="subraces")
+     *
      * @ORM\JoinColumn(nullable=false)
-     * @Groups("read_subraces")
      */
-    private $race;
+    #[Groups('read_subraces')]
+    private ?\App\Entity\Race $race = null;
 
     public function getId(): ?int
     {
