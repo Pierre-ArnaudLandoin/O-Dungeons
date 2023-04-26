@@ -9,44 +9,30 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=ItemRepository::class)
- */
+#[ORM\Entity(repositoryClass: ItemRepository::class)]
 class Item
 {
-    /**
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue
-     *
-     * @ORM\Column(type="integer")
-     */
     #[Groups(['read_class', 'read_backgrounds'])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Groups(['read_class', 'read_backgrounds'])]
     #[Assert\NotBlank]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $name = null;
 
-    /**
-     * @ORM\Column(type="float")
-     */
     #[Groups(['read_class', 'read_backgrounds'])]
     #[Assert\NotBlank]
     #[Assert\PositiveOrZero]
+    #[ORM\Column(type: 'float')]
     private ?float $weight = null;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Background::class, mappedBy="items")
-     */
+    #[ORM\ManyToMany(targetEntity: Background::class, mappedBy: 'items')]
     private \Doctrine\Common\Collections\ArrayCollection|array $backgrounds;
 
-    /**
-     * @ORM\OneToMany(targetEntity=PlayableClassItem::class, mappedBy="item", orphanRemoval=true)
-     */
+    #[ORM\OneToMany(targetEntity: PlayableClassItem::class, mappedBy: 'item', orphanRemoval: true)]
     private \Doctrine\Common\Collections\ArrayCollection|array $playableClassItems;
 
     public function __construct()

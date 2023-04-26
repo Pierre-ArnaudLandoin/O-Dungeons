@@ -9,49 +9,36 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=PlayableClassRepository::class)
- */
+#[ORM\Entity(repositoryClass: PlayableClassRepository::class)]
 class PlayableClass
 {
-    /**
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue
-     *
-     * @ORM\Column(type="integer")
-     */
     #[Groups(['browse_class', 'read_class'])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Groups(['browse_class', 'read_class'])]
     #[Assert\NotBlank]
     #[Assert\Length(min: 2, max: 255, minMessage: 'Le nom de la sous-classe doit contenir au moins {{ limit }} caractères', maxMessage: 'Le nom de la sous-classe doit contenir au maximum {{ limit }} caractères')]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $name = null;
 
-    /**
-     * @ORM\Column(type="text")
-     */
     #[Groups('read_class')]
     #[Assert\NotBlank]
+    #[ORM\Column(type: 'text')]
     private ?string $description = null;
 
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
     #[Groups('read_class')]
     #[Assert\NotBlank]
     #[Assert\Length(min: 3, minMessage: 'Il faut au minimum trois caractères')]
+    #[ORM\Column(type: 'string', length: 50)]
     private ?string $lifeDice = null;
 
     /**
      * The image URL to the folder asset (this is the part send in DB).
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
      */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $imageUrl = null;
 
     /**
@@ -65,39 +52,27 @@ class PlayableClass
      */
     private $imageFile;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Subclass::class, mappedBy="playableClass", orphanRemoval=true)
-     */
     #[Groups('read_class')]
+    #[ORM\OneToMany(targetEntity: Subclass::class, mappedBy: 'playableClass', orphanRemoval: true)]
     private \Doctrine\Common\Collections\ArrayCollection|array $subclasses;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Ability::class, inversedBy="playableClasses")
-     */
+    #[ORM\ManyToMany(targetEntity: Ability::class, inversedBy: 'playableClasses')]
     private \Doctrine\Common\Collections\ArrayCollection|array $abilities;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Armor::class, inversedBy="playableClasses")
-     */
     #[Groups('read_class')]
+    #[ORM\ManyToMany(targetEntity: Armor::class, inversedBy: 'playableClasses')]
     private \Doctrine\Common\Collections\ArrayCollection|array $armors;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Weapon::class, inversedBy="playableClasses")
-     */
     #[Groups('read_class')]
+    #[ORM\ManyToMany(targetEntity: Weapon::class, inversedBy: 'playableClasses')]
     private \Doctrine\Common\Collections\ArrayCollection|array $weapons;
 
-    /**
-     * @ORM\OneToMany(targetEntity=PlayableClassItem::class, mappedBy="playableClass", orphanRemoval=true, cascade={"persist"})
-     */
     #[Groups('read_class')]
+    #[ORM\OneToMany(targetEntity: PlayableClassItem::class, mappedBy: 'playableClass', orphanRemoval: true, cascade: ['persist'])]
     private \Doctrine\Common\Collections\ArrayCollection|array $playableClassItems;
 
-    /**
-     * @ORM\Column(type="text")
-     */
     #[Groups('browse_class')]
+    #[ORM\Column(type: 'text')]
     private ?string $quickDescription = null;
 
     public function __construct()

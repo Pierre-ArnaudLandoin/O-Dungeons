@@ -9,60 +9,42 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=BackgroundRepository::class)
- */
+#[ORM\Entity(repositoryClass: BackgroundRepository::class)]
 class Background
 {
-    /**
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue
-     *
-     * @ORM\Column(type="integer")
-     */
     #[Groups(['browse_backgrounds', 'read_backgrounds'])]
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     #[Groups(['browse_backgrounds', 'read_backgrounds'])]
     #[Assert\NotBlank]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $name = null;
 
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
     #[Groups('read_backgrounds')]
     #[Assert\NotBlank]
+    #[ORM\Column(type: 'string', length: 50)]
     private ?string $capacities = null;
 
-    /**
-     * @ORM\Column(type="text")
-     */
     #[Groups('read_backgrounds')]
     #[Assert\NotBlank]
+    #[ORM\Column(type: 'text')]
     private ?string $description = null;
 
-    /**
-     * @ORM\Column(type="integer", options={"default": 0})
-     */
     #[Groups('read_backgrounds')]
     #[Assert\PositiveOrZero]
+    #[ORM\Column(type: 'integer', options: ['default' => 0])]
     private ?int $nbLanguage = null;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Item::class, inversedBy="backgrounds")
-     */
     #[Groups('read_backgrounds')]
+    #[ORM\ManyToMany(targetEntity: Item::class, inversedBy: 'backgrounds')]
     private \Doctrine\Common\Collections\ArrayCollection|array $items;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
     #[Groups('read_backgrounds')]
     #[Assert\PositiveOrZero]
+    #[ORM\Column(type: 'integer')]
     private ?int $nbGolds = null;
 
     public function __construct()
