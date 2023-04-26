@@ -21,15 +21,13 @@ class PlayableClass
      *
      * @ORM\Column(type="integer")
      */
-    #[Groups('browse_class')]
-    #[Groups('read_class')]
+    #[Groups(['browse_class', 'read_class'])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups('browse_class')]
-    #[Groups('read_class')]
+    #[Groups(['browse_class', 'read_class'])]
     #[Assert\NotBlank]
     #[Assert\Length(min: 2, max: 255, minMessage: 'Le nom de la sous-classe doit contenir au moins {{ limit }} caractères', maxMessage: 'Le nom de la sous-classe doit contenir au maximum {{ limit }} caractères')]
     private ?string $name = null;
@@ -59,8 +57,7 @@ class PlayableClass
     /**
      * The image encode in base64 (only used in JSON response).
      */
-    #[Groups('browse_class')]
-    #[Groups('read_class')]
+    #[Groups(['browse_class', 'read_class'])]
     private ?string $image = null;
 
     /**

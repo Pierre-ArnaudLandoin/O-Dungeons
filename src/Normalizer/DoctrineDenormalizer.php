@@ -21,7 +21,7 @@ class DoctrineDenormalizer implements DenormalizerInterface
     /**
      * {@inheritDoc}
      */
-    public function supportsDenormalization($data, $type, $format = null)
+    public function supportsDenormalization($data, $type, $format = null): bool
     {
         return str_starts_with($type, 'App\\Entity\\') && is_numeric($data);
     }
@@ -29,8 +29,8 @@ class DoctrineDenormalizer implements DenormalizerInterface
     /**
      * {@inheritDoc}
      */
-    public function denormalize($data, $class, $format = null, array $context = [])
+    public function denormalize($data, $type, $format = null, array $context = [])
     {
-        return $this->em->find($class, $data);
+        return $this->em->find($type, $data);
     }
 }

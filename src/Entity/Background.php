@@ -21,15 +21,13 @@ class Background
      *
      * @ORM\Column(type="integer")
      */
-    #[Groups('browse_backgrounds')]
-    #[Groups('read_backgrounds')]
+    #[Groups(['browse_backgrounds', 'read_backgrounds'])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups('browse_backgrounds')]
-    #[Groups('read_backgrounds')]
+    #[Groups(['browse_backgrounds', 'read_backgrounds'])]
     #[Assert\NotBlank]
     private ?string $name = null;
 

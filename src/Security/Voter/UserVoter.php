@@ -33,12 +33,8 @@ class UserVoter extends Voter
 
         // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {
-            case self::EDIT:
-                if ($user->getId() === $subject->getId()) {
-                    return true;
-                }
-                break;
             case self::VIEW:
+            case self::EDIT:
                 if ($user->getId() === $subject->getId()) {
                     return true;
                 }

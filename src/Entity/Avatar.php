@@ -21,23 +21,20 @@ class Avatar
      *
      * @ORM\Column(type="integer")
      */
-    #[Groups('browse_avatars')]
-    #[Groups('read_user')]
+    #[Groups(['browse_avatars', 'read_user'])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups('browse_avatars')]
-    #[Groups('read_user')]
+    #[Groups(['browse_avatars', 'read_user'])]
     #[Assert\NotBlank]
     private ?string $name = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups('browse_avatars')]
-    #[Groups('read_user')]
+    #[Groups(['browse_avatars', 'read_user'])]
     #[Assert\Url]
     #[Assert\NotBlank]
     private ?string $imageUrl = null;

@@ -11,7 +11,7 @@ class AuthenticationSuccessListener
     /**
      * Sends user datas with JWT.
      */
-    public function onAuthenticationSuccessResponse(AuthenticationSuccessEvent $event)
+    public function onAuthenticationSuccessResponse(AuthenticationSuccessEvent $event): void
     {
         $data = $event->getData();
         /**

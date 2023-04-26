@@ -19,17 +19,13 @@ class Subrace
      *
      * @ORM\Column(type="integer")
      */
-    #[Groups('read_race')]
-    #[Groups('browse_subraces')]
-    #[Groups('read_subraces')]
+    #[Groups(['read_race', 'browse_subraces', 'read_subraces'])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups('read_race')]
-    #[Groups('browse_subraces')]
-    #[Groups('read_subraces')]
+    #[Groups(['read_race', 'browse_subraces', 'read_subraces'])]
     #[Assert\NotBlank]
     #[Assert\Length(min: 2, max: 255, minMessage: 'Le nom de la sous-race doit contenir au moins {{ limit }} caractères', maxMessage: 'Le nom de la sous-race doit contenir au maximum {{ limit }} caractères')]
     private ?string $name = null;
@@ -37,16 +33,14 @@ class Subrace
     /**
      * @ORM\Column(type="text")
      */
-    #[Groups('read_race')]
-    #[Groups('read_subraces')]
+    #[Groups(['read_race', 'read_subraces'])]
     #[Assert\NotBlank]
     private ?string $description = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups('read_race')]
-    #[Groups('read_subraces')]
+    #[Groups(['read_race', 'read_subraces'])]
     #[Assert\Url]
     #[Assert\NotBlank]
     private ?string $imageUrl = null;
@@ -54,8 +48,7 @@ class Subrace
     /**
      * @ORM\Column(type="integer", options={"default": 0})
      */
-    #[Groups('read_race')]
-    #[Groups('read_subraces')]
+    #[Groups(['read_race', 'read_subraces'])]
     #[Assert\NotBlank]
     #[Assert\PositiveOrZero]
     private ?int $strength = null;
@@ -63,8 +56,7 @@ class Subrace
     /**
      * @ORM\Column(type="integer", options={"default": 0})
      */
-    #[Groups('read_race')]
-    #[Groups('read_subraces')]
+    #[Groups(['read_race', 'read_subraces'])]
     #[Assert\NotBlank]
     #[Assert\PositiveOrZero]
     private ?int $dexterity = null;
@@ -72,8 +64,7 @@ class Subrace
     /**
      * @ORM\Column(type="integer", options={"default": 0})
      */
-    #[Groups('read_race')]
-    #[Groups('read_subraces')]
+    #[Groups(['read_race', 'read_subraces'])]
     #[Assert\NotBlank]
     #[Assert\PositiveOrZero]
     private ?int $constitution = null;
@@ -81,8 +72,7 @@ class Subrace
     /**
      * @ORM\Column(type="integer", options={"default": 0})
      */
-    #[Groups('read_race')]
-    #[Groups('read_subraces')]
+    #[Groups(['read_race', 'read_subraces'])]
     #[Assert\NotBlank]
     #[Assert\PositiveOrZero]
     private ?int $wisdom = null;
@@ -90,8 +80,7 @@ class Subrace
     /**
      * @ORM\Column(type="integer", options={"default": 0})
      */
-    #[Groups('read_race')]
-    #[Groups('read_subraces')]
+    #[Groups(['read_race', 'read_subraces'])]
     #[Assert\NotBlank]
     #[Assert\PositiveOrZero]
     private ?int $intelligence = null;
@@ -99,8 +88,7 @@ class Subrace
     /**
      * @ORM\Column(type="integer", options={"default": 0})
      */
-    #[Groups('read_race')]
-    #[Groups('read_subraces')]
+    #[Groups(['read_race', 'read_subraces'])]
     #[Assert\NotBlank]
     #[Assert\PositiveOrZero]
     private ?int $charisma = null;
@@ -108,8 +96,7 @@ class Subrace
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    #[Groups('read_race')]
-    #[Groups('read_subraces')]
+    #[Groups(['read_race', 'read_subraces'])]
     #[Assert\NotBlank]
     private ?string $trait = null;
 

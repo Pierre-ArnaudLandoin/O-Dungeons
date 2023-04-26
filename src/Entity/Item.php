@@ -21,23 +21,20 @@ class Item
      *
      * @ORM\Column(type="integer")
      */
-    #[Groups('read_class')]
-    #[Groups('read_backgrounds')]
+    #[Groups(['read_class', 'read_backgrounds'])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups('read_class')]
-    #[Groups('read_backgrounds')]
+    #[Groups(['read_class', 'read_backgrounds'])]
     #[Assert\NotBlank]
     private ?string $name = null;
 
     /**
      * @ORM\Column(type="float")
      */
-    #[Groups('read_class')]
-    #[Groups('read_backgrounds')]
+    #[Groups(['read_class', 'read_backgrounds'])]
     #[Assert\NotBlank]
     #[Assert\PositiveOrZero]
     private ?float $weight = null;

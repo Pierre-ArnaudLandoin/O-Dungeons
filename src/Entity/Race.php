@@ -21,17 +21,13 @@ class Race
      *
      * @ORM\Column(type="integer")
      */
-    #[Groups('browse_race')]
-    #[Groups('read_race')]
-    #[Groups('read_subraces')]
+    #[Groups(['browse_race', 'read_race', 'read_subraces'])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups('browse_race')]
-    #[Groups('read_race')]
-    #[Groups('read_subraces')]
+    #[Groups(['browse_race', 'read_race', 'read_subraces'])]
     #[Assert\NotBlank]
     #[Assert\Length(min: 2, max: 255, minMessage: 'Le nom de la race doit contenir au moins {{ limit }} caractères', maxMessage: 'Le nom de la race doit contenir au maximum {{ limit }} caractères')]
     private ?string $name = null;
@@ -46,8 +42,7 @@ class Race
     /**
      * @ORM\Column(type="text")
      */
-    #[Groups('browse_race')]
-    #[Groups('read_race')]
+    #[Groups(['browse_race', 'read_race'])]
     #[Assert\NotBlank]
     private ?string $quickDescription = null;
 
@@ -67,8 +62,7 @@ class Race
     /**
      * The image encode in base64.
      */
-    #[Groups('browse_race')]
-    #[Groups('read_race')]
+    #[Groups(['browse_race', 'read_race'])]
     private ?string $image = null;
 
     /**

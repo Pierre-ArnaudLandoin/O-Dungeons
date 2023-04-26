@@ -21,15 +21,13 @@ class Ability
      *
      * @ORM\Column(type="integer")
      */
-    #[Groups('browse_abilities')]
-    #[Groups('read_abilities')]
+    #[Groups(['browse_abilities', 'read_abilities'])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups('browse_abilities')]
-    #[Groups('read_abilities')]
+    #[Groups(['browse_abilities', 'read_abilities'])]
     #[Assert\NotBlank]
     #[Assert\Length(max: 255, maxMessage: 'Nombre de caractères autorisés dépassés ({{ value }}), maximum 255')]
     private ?string $name = null;
